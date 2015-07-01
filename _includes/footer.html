@@ -2,7 +2,7 @@
 
   <div class="wrapper">
 
-    <h2 class="footer-heading">{{ site.title }}</h2>
+    <!--<h2 class="footer-heading">{{ site.title }}</h2>-->
 
     <div class="footer-col-wrapper">
       <div class="footer-col  footer-col-1">
@@ -27,7 +27,8 @@
             </a>
           </li>
           {% endif %}
-
+          <li>
+            <p class="rss-subscribe"><a href="{{ "/feed.xml" | prepend: site.baseurl }}">subscribe RSS</a></p>
           {% if site.twitter_username %}
           <li>
             <a href="https://twitter.com/{{ site.twitter_username }}">

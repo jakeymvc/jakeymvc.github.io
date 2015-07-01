@@ -1,14 +1,21 @@
 # Site settings
-title: Jakey's blog about ASP.NET MVC
-email: your-email@domain.com
+title: 제이키의 MVC 이야기
+email: jakeymvc@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  웹 개발을 즐겁게 만들어준 ASP.NET MVC 와  기대 가득한 ASP.NET 5를 이야하기하는 블로그 
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
-twitter_username: jekyllrb
-github_username:  jekyll
+url: "http://jakeymvc.github.io" # the base hostname & protocol for your site
+#twitter_username: jakeryu  # if defined, it appears in the footer 
+github_username:  jakeymvc
+timezone: Europe/London
+permalink: pretty
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
 
 # Build settings
-markdown: kramdown
+markdown: redcarpet
