@@ -1,5 +1,5 @@
 ---
-layout: post
+#layout: post
 title:  "ASP.NET 5 - REBOOT"
 date:   2015-07-01 18:45:00
 categories: aspnet5

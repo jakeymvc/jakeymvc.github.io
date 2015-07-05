@@ -1,6 +1,6 @@
 ---
-layout: post
-title:  "병렬 수행과 크로스 플래폼"
+#layout: post
+title:  "병렬 수행과 크로스 플랫폼"
 date:   2015-07-03 22:05:00
 categories: aspnet5
 ---
