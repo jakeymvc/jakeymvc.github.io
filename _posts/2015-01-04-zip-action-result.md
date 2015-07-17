@@ -3,6 +3,7 @@ title:  "Zip 파일 반환하는 ActionResult 만들기"
 date:   2015-01-04 00:00:00
 categories: mvc
 author: Jake Ryu
+permalink: /action-result-to-return-zip-file/
 ---
 
 이미지 뷰어를 구현하다 다운로드 기능이 필요해졌다. 한 번 클릭에 뷰어에서 재생되는 모든 이미지를 압축하여 다운로드 한다. 아무래도 압축 풀기의 번거로움이 있으니 이미지가 하나만 있다면 압축 없이 다운로드할 수 있게 해보자.
