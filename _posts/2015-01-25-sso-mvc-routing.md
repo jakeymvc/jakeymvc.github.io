@@ -169,7 +169,7 @@ public static void RegisterRoutes(RouteCollection routes)
 
 <그림 2> 상세정보 페이지로의 링크가 있는 랜딩 페이지
 
-<그림 2> 페이지의 뷰 소스는 아래와 같다.
+페이지의 뷰 소스는 아래와 같다.
 
 {% highlight html %}
 @{
