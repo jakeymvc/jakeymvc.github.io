@@ -6,7 +6,7 @@ description: > # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://blog.jakeymvc.com" # the base hostname & protocol for your site
 #twitter_username: jakeryu  # if defined, it appears in the footer 
-github_username:  jakeymvc@gmail.com
+github_username: "jakeymvc" 
 timezone: Europe/London
 permalink: pretty
 defaults:
