@@ -4,7 +4,7 @@ title:  "ASP.NET 5 - REBOOT"
 date:   2015-07-01 18:45:00
 categories: aspnet5
 author: Jake Ryu
-permalink: /aspnet5/
+permalink: /aspnet5reboot/
 ---
 
 2014년 2월 취임한 사티아 나델라(Satya Nadella), 마이크로소프트의 최고경영자는 ‘모바일 퍼스트, 클라우드 퍼스트(Mobile First, Cloud First)’라는 비전과 함께 변화를 주도했다. 아이패드용 오피스를 출시하고 일부 제품을 무료로 전환하고 닷넷 프레임워크의 소스를 공개하는 등, 이전의 MS라면 상상할 수 없던 변화를 보여줬다. 이 비전엔 어떤 의미가 있을까.
