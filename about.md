@@ -22,5 +22,5 @@ permalink: /about/
 ####마이크로소프트웨어 기고####
 * ASP.NET REBOOT - ASP.NET 5 소개  (07/2015)
 * ASP.NET REBOOT - ASP.NET 5 솔루션 구성  (08/2015)
-* ASP.NET REBOOT - ASP.NET 5 개발의 변화  (09/2015)
+* ASP.NET REBOOT - ASP.NET 5 개발의 변화  (10/2015)
 
