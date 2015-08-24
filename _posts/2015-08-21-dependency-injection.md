@@ -3,7 +3,7 @@ title:  "ASP.NET 5 종속성 주입 (Dependency Injection)"
 date:   2015-08-21 10:00:00
 categories: aspnet5
 author: Jake Ryu
-permalink: /aspnet5-di/
+permalink: /aspnet5-dependency-injection/
 ---
 
 IT 업계에서 변하지 않는 유일한 것이 있다면 변화 그 자체라는 말이 있다. 그럼에도 불구하고 변화에 유연하게 대처할 수 있는 애플리케이션을 작성하는 일은 쉬운 일이 아니다. 객체지향적으로 클래스가 잘 설계되었다 해도 한 클래스에서 다른 클래스의 인스턴스를 생성하는 방식은 클래스간의 의존성을 만들기 때문에 부분적인 변경이라도 전체적인 영향을 항상 검토해야 한다. 따라서, 클래스 간의 결합은 느슨해야 하고 이렇게 결합력이 약한 애플리케이션은 변경에 유연하게 대처할 수 있다.
