@@ -3,6 +3,8 @@ layout: default
 ---
 
 <div class="home">
+    
+    <p class="rss-subscribe" style="text-align: right;"><a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS 구독하기</a></p>
 
   <!--<h1 class="page-heading">Posts</h1>-->
 
@@ -19,5 +21,5 @@ layout: default
     {% endfor %}
   </ul>
 
-  <p class="rss-subscribe">subscribe via <a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS</a></p>
+  
 </div>
