@@ -208,7 +208,7 @@ public class StockMaintenanceController : ApiController
 
 
 
-<목록 2>를 보면 검사 주기별로 필요한 입력 값을 조사하여 빠진 항목이 있다면 `ModelState.AddModelError` 메서드를 사용해 에러 내용을 입력하고 있다. 그리고 마지막으로 `ModelState.IsValid` 속성을 조사하여 에러 내용이 하나라도 있으면 400 Bad Request 를 반환한다.
+목록 2를 보면 검사 주기별로 필요한 입력 값을 조사하여 빠진 항목이 있다면 `ModelState.AddModelError` 메서드를 사용해 에러 내용을 입력하고 있다. 그리고 마지막으로 `ModelState.IsValid` 속성을 조사하여 에러 내용이 하나라도 있으면 400 Bad Request 를 반환한다.
 
 보기에 별로 좋지 않은 코드지만 딱히 좋은 방법이 떠오르지 않는다. 현재의 유효성 검사는 속성 수준에서 간단하게 처리할 수 없는데 그 이유는 속성간에 의존성이 있기 때문이다. 그래서 모델 수준에서 접근해야 하는데 몇 가지 방법 중 `IValidatableObject` 인터페이스를 구현하는 것으로 방향을 잡았다. 다른 방법으로는 사용자 정의 유효성 검사 어트리뷰트를 작성하는 것인데 다른 글에서 보다 자세하게 알아 보도록 한다.
 
