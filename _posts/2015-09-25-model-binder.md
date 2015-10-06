@@ -22,6 +22,10 @@ WHERE [ActionDate] >= '2015-09-01 00:00:00:000'
 
 목록 1은 프로그램에서 사용하고 있는 조회문이다. 애초에 toDate를 처리할 때 `2015-09-30 23:59:59:000` 처럼 시간 값을 붙여주면 좋겠다는 생각이 들었다.
 
+> Edit:  컴퓨팅에서 1초라는 시간은 길다고도 할 수 있다. 처음에는 밀리 세컨드를 염두에 두지 않았는데 독자의 피드백을 반영하기 위해 `2015-09-30 23:59:59:997` 로 변경했다. 밀리 세컨드를 999로 설정하면 MS SQL 서버는 `2015-10-01 00:00:00:000`으로 해석한다. 천분의 일(1/1000)로 처리하지 못하고 삼백분의 일(1/300)로 계산하기 때문에 올림처리가 되는 현상이 있기 때문이다. 
+
+> 물론, 받은 날짜에 하루를 더한 후 less than `2015-10-01 00:00:00:000` 처리를 해도 되지만 이 것 때문에 날짜를 더하는 로직과, greater than or equal to `>=` 와 less than `<` 을 혼용하는 것을 개인적으로 선호하지 않는다. `>=`, `<=` 를 사용하여 일관되게 `=`를 사용함으로써 날짜를 between 이라는 개념에 맞추어 두는 것을 선호한다. 
+
 <목록 1> Entity Framework 쿼리
 
 {% highlight c# %}
@@ -50,11 +54,7 @@ public IQueryable<BatteryVoltageTransactionReportData> GetBatteryVoltageReading(
 3.  MVC 프레임워크에 DateRange 클래스 전용 모델 바인더를 알림
 
 
-첫 번째로 DateRange 클래스를 목록 2와 같이 정의한다. DateTime과 같은 기본 형식은 MVC 프레임워크가 `DefaultModelBinder` 라는 모델 바인더를 사용하여 처리한다. 이 시나리오에서는, FromDate는 원래 값을 유지해야 하고 ToDate의 시간 값을 조정해야하기 때문에 DateTime 형식 모델 바인딩에 개입한다 해도 from, to를 구별해서 처리하는 것이 힙들다. 
-
->노트 - 사용자 정의 값 공급자를 구현해서 모델의 특정 속성만 처리하는 방법이 있는데 다음 포스팅에서 알아보기로 한다.
-
-따라서, DateRange 클래스를 대상으로 모델 바인딩하면서 속성 이름으로 구별하는 것이 쉬운 방법이다. 
+첫 번째로 DateRange 클래스를 목록 2와 같이 정의한다. DateTime과 같은 기본 형식은 MVC 프레임워크가 `DefaultModelBinder` 라는 모델 바인더를 사용하여 처리한다. 이 시나리오에서는, FromDate는 원래 값을 유지하면서 ToDate의 시간 값을 조정할 것이므로 DateTime 이라는 primitive type 자체를 대상으로 할 수 없다. 만약, 그렇게 한다면 to 성격의 값을 구별해내야 하는 어려움이 따른다. 속성명을 사용해서 구분해야 하는데 이 방법에 대해서는 다음 포스팅에서 알아보기로 한다.
 
 <목록 2> DateRange 클래스
 
@@ -67,8 +67,7 @@ public class DateRange
 {% endhighlight %}
 
 
-
-목록 3은 `IModelBinder` 인터페이스를 상속하여 사용자 정의 모델 바인더를 구현하고 있다. 
+사용자 클래스를 정의했으니 이를 처리할 모델 바인더를 만들 차례다. 목록 3은 `IModelBinder` 인터페이스를 상속하여 사용자 정의 모델 바인더를 구현하고 있다. 
 
 <목록 3> 사용자 정의 모델 바인더
 
@@ -82,7 +81,7 @@ public class DateRangeBinder : IModelBinder
         model.FromDate = GetValue(bindingContext, "FromDate");
 
         DateTime temp =  GetValue(bindingContext, "ToDate");
-        model.ToDate = new DateTime(temp.Year, temp.Month, temp.Day, 23, 59, 59);
+        model.ToDate = new DateTime(temp.Year, temp.Month, temp.Day, 23, 59, 59, 997);
 
         return model;
     }
@@ -104,11 +103,11 @@ public class DateRangeBinder : IModelBinder
 
 `IModelBinder` 인터페이스는 `BindModel`이라는 하나의 메서드를 정의하고 있고, 컨트롤러 컨텍스트와 모델 바인딩 컨텍스트를 받는다. 모델 바인딩 컨텍스트의 `Model` 속성에 `DateRange` 클래스의 인스턴스가 있으면 사용하고 그렇지 않으면 새 인스턴스를 준비한다.
 
-`GetValue` 메서드는 MVC 프레임워크의 기본 값 제공자(Value Provider)를 사용해서 입력된 값을 읽는다. 그 결과는 `ValueProviderResult` 형식이므로 `AttemptedValue` 라는 문자열 속성을 사용하여 날짜 형식으로 변환한다. 만약, 값이 없다면 기본 값으로 현재 날짜를 돌려준다.  
+`GetValue` 메서드는 MVC 프레임워크의 기본 값 제공자(Value Provider)를 사용해서 입력된 값을 읽는다. 그 결과는 `ValueProviderResult` 형식이므로 `AttemptedValue` 라는 문자열 속성을 사용하여 날짜 형식으로 변환한다 (RawValue 라는 object 형식의 속성을 사용하여 형 변환해도 된다). 만약, 값이 없다면 기본 값으로 현재 날짜를 돌려주고 있다.  
 
-이제 마지막으로 MVC 프레임워크에 `DateRange` 클래스의 모델 바인더가 있다고 알려야 한다. 두 가지 방법이 있다.
+이제 마지막으로 MVC 프레임워크에 `DateRange` 클래스의 모델 바인더가 있다고 알려주는 두 가지 방법을 목록 4와 목록 5에서 보여주고 있다.
 
-<목록 4> Global.asax 파일에 선언
+<목록 4> Global.asax 파일 Application_Start() 메서드에 선언
 
 ```
     ModelBinders.Binders.Add(typeof(DateRange), new DateRangeBinder());
@@ -127,7 +126,7 @@ public class DateRange
 
 목록 4는 Global.asax 파일의 Application_Start() 메서드에 추가하는 내용으로 모델 바인더의 컬렉션에 새로 정의한 모델 바인더를 등록하고 있다. 
 
-목록 5는 모델의 어트리뷰트로서 모델 바인더를 지정하고 있는 모습이다. 개인적으로는 후자의 경우가 가독성이 더 좋은 듯 하다. 모델과 그 바인더를 한 곳에서 보는 것이 모델 바인딩 처리를 별도로 한다는 명시적인 표현이기 때문이다.
+목록 5는 모델의 어트리뷰트로서 모델 바인더를 지정하고 있는 모습이다. 개인적으로는 후자의 경우가 가독성이 더 좋은 듯 하다. 모델과 그 바인더를 한 곳에서 보는 것이 모델 바인딩 처리를 별도로 한다는 명시적인 표현이기 때문이다. 참고로, ASP.NET 5에서는 Global.asax 파일이 없어지고 Startup 클래스에서 시작 처리를 해야 한다.
 
 ###정리###
 
