@@ -8,7 +8,7 @@ permalink: /project-json/
 
 project.json 파일은 ASP.NET 5 프레임워크에서 새로 도입된 프로젝트 설정 파일이다.
 
-ASP.NET 5 프로젝트는 DNX(.NET Execution Environment) 프로젝트라고도 말할 수 있다. DNX는 애플리케이션의 실행을 위해 CLR을 호스트하고 종속성을 관리하며 애플리케이션의 실행지점(Startup 클래스)을 찾아서 실행한다. JSON 포맷의 project.json 이라는 가볍고 단순한 파일이 실행환경에 필요한 모든 정보를 제공하는데 DNX 프로젝트는 이 파일 의해 정의된다.
+ASP.NET 5 프로젝트는 DNX(.NET Execution Environment) 프로젝트라고도 말할 수 있다. DNX는 애플리케이션의 실행을 위해 CLR을 호스트하고 종속성을 관리하며 애플리케이션의 실행지점(Startup 클래스)을 찾아서 실행한다. JSON 포맷의 project.json 이라는 가볍고 단순한 파일이 실행환경에 필요한 모든 정보를 제공하는데 DNX 프로젝트는 이 파일에 의해 정의된다.
 
 ASP.NET 5 애플리케이션을 실행할 때, 비주얼 스튜디오를 사용하지 않고 윈도우 커맨드 창에서 DNX 명령어를 사용할 수도 있는데, 이 때 project.json 파일이 포함된 폴더 경로를 반드시 지정해야 한다. project.json 파일이 프로젝트를 정의한다는 의미를 다시 한번 확인할 수 있는 대목이다.
 
