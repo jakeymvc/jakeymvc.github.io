@@ -4,15 +4,16 @@ title: About
 permalink: /about/
 ---
 
-<br /><br />
+![with my son](/assets/profile.jpg)
+
 
 ####류지형 (Jake Ryu)####
 
 현대자동차 영국법인에서 Application Architect로 근무.
 
-마이크로소프트 웹 스택에 기반해서 MVC 애플리케이션과 Web API를 주로 개발하지만, 웹 개발에 한해서는 벤더와 기술을 가리지 않고 공부하며 웹 아키텍트를 목표로 하고 있다.
+ASP.NET MVC 애플리케이션과 Web API를 주로 개발며 적절하게 패턴을 사용하고 코드의 재사용성을 높이는 것이 주관심사이다. Rails, NodeJS 등 다른 웹 개발 기술도 학습하며 웹 개발 전반에 대한 인사이트를 쌓고자 노력하고 있다. 
 
-기술 공부하는 것을 즐긴다. [Taeyo.NET](http://taeyo.net/) 번역팀에서 번역일을 돕고 있으며 [ASP.NET Korea User Group](https://www.facebook.com/groups/AspxKorea/)에서 활동한다. 틈틈히 쓴 글을 모아  [마이크로소프트웨어](https://www.imaso.co.kr/)에 기고도 하고 있다.
+[Taeyo.NET](http://taeyo.net/) 번역팀에서 번역일을 돕고 있으며 [ASP.NET Korea User Group](https://www.facebook.com/groups/AspxKorea/)에서 활동한다. 틈틈히 쓴 글을 모아  [마이크로소프트웨어](https://www.imaso.co.kr/)에 기고도 하고 있다.
 
 <br />
 
