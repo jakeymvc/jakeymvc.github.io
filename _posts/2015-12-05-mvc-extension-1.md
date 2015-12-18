@@ -2,7 +2,7 @@
 title:  "MVC 확장 포인트 (1/10) - Action Result"
 date:   2015-12-05
 categories: mvc
-tags: 
+tags: extension
 author: Jake Ryu
 permalink: /mvc-extension-action-result
 ---
