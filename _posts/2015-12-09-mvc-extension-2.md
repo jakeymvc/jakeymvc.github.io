@@ -235,7 +235,8 @@ public void OnActionExecuted(ActionExecutedContext filterContext)
 {
     var _context = DependencyResolver.Current.GetService<AppDbContext>();
     var sessionId = filterContext.HttpContext.Session["Tracker"];
-    if (sessionId != null)
+    if (sessionId != null)    if (sessionId != null)
+
     {
         Guid tracker;
         if (Guid.TryParse(sessionId.ToString(), out tracker))
