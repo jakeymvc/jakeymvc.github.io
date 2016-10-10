@@ -1,0 +1,318 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>태스크 러너 (Task Runner) &#8211; 제이키의 MVC 이야기</title>
+<meta name="description" content="자바스크립트의 비약적인 발전으로 현대의 웹 개발은 클라이언트 단에서 다양한 일을 효과적으로 수행하고 있다. 모던 웹을 작성한다고 할 때 어떤 일들이 필요한가.
+
+">
+<meta name="keywords" content="aspnet5">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="태스크 러너 (Task Runner)">
+<meta name="twitter:description" content="자바스크립트의 비약적인 발전으로 현대의 웹 개발은 클라이언트 단에서 다양한 일을 효과적으로 수행하고 있다. 모던 웹을 작성한다고 할 때 어떤 일들이 필요한가.
+
+">
+
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/site-logo.gif">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="kr_KR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="태스크 러너 (Task Runner)">
+<meta property="og:description" content="자바스크립트의 비약적인 발전으로 현대의 웹 개발은 클라이언트 단에서 다양한 일을 효과적으로 수행하고 있다. 모던 웹을 작성한다고 할 때 어떤 일들이 필요한가.
+
+">
+<meta property="og:url" content="http://localhost:4000/task-runner/">
+<meta property="og:site_name" content="제이키의 MVC 이야기">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/task-runner/">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="제이키의 MVC 이야기 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://localhost:4000/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://localhost:4000/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+
+</head>
+
+<body id="post">
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="http://localhost:4000/about/" >About</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/articles/" >Articles</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/tags/" >Tags</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/search/" >Search</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://localhost:4000/" class="site-logo" rel="home" title="제이키의 MVC 이야기"><img src="http://localhost:4000/images/site-logo.gif" width="200" height="200" alt="제이키의 MVC 이야기 logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://localhost:4000/">제이키의 MVC 이야기</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">웹 개발은 MVC 패턴으로. Angular와 ASP.NET Core의 궁합은?</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="http://localhost:4000/tags/#aspnet5" title="Pages tagged aspnet5">aspnet5</a></li>
+        </ul>
+        
+          <h1 class="entry-title">태스크 러너 (Task Runner)</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="http://localhost:4000/images/jake-ryu-photo.jpg" class="bio-photo" alt="Jake Ryu bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Jake Ryu</span></span>
+        <span class="entry-date date published"><time datetime="2015-08-03T13:00:00+01:00"><i class="fa fa-calendar-o"></i> August 03, 2015</time></span>
+        
+        <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+        <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=aspnet5&amp;text=태스크%20러너%20(Task%20Runner)&amp;url=http://localhost:4000/task-runner/" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/task-runner/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<span class="social-share-googleplus">
+  <a href="https://plus.google.com/share?url=http://localhost:4000/task-runner/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+</span>
+<!-- /.social-share -->
+        
+      </footer>
+      <div class="entry-content">
+        <p>자바스크립트의 비약적인 발전으로 현대의 웹 개발은 클라이언트 단에서 다양한 일을 효과적으로 수행하고 있다. 모던 웹을 작성한다고 할 때 어떤 일들이 필요한가.</p>
+
+<blockquote>
+  <ul>
+    <li>LESS 또는 SASS 파일을 CSS로 컴파일하기</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>CoffeeScript 또는 TypeScript를 자바스크립트 파일로 컴파일 하기</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>자바스크립트 파일들을 묶고(bundle) 축소(minify)하기</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>자바스크립트가 코딩 규칙을 따르는지 JSHint 툴로 검사하기</li>
+  </ul>
+</blockquote>
+
+<p>아마 박스 속 작업들이 웹 개발의 일부가 되어 애플리케이션마다 반복적으로 수행될 것이다. 이런 일련의 작업들을 자동화 하기 위해 태스크 러너(이하 task runner)라는 하나의 앱을 사용하는데 비주얼 스튜디오 2015(Visual Studio 2015)는 task runner로서 가장 인기 있는 자바스크립트 기반의 Gulp와 Grunt를 지원한다.</p>
+
+<p>Gulp가 비교적 최근에 개발되었고 현대적인 문법과 디스크 I/O가 아닌 스트림을 사용한 빠른 성능 때문인지 ASP.NET 5 Web Site 템플릿에 의해 기본적으로 사용된다. Gulp는 노드 패키지로서 NPM(Node.js Package Manger) 설정 파일인 package.json 에 의해 설치된다. 그리고, 자동화 작업(task)은 gulpfile.js 파일에 작성한다. 리스트 1은 Assets 폴더 하위의 모든 자바스크립트 파일을 wwwroot/js 폴더로 복사하는 예제다.</p>
+
+<p>&lt;리스트 1&gt; Assets 폴더 하위의 모든 자바스크립트 파일을 wwwroot/js 폴더로 복사</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gulp'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">paths</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">src</span><span class="p">:</span> <span class="s2">"./Assets/**/*.js"</span><span class="p">,</span>
+    <span class="na">dest</span><span class="p">:</span> <span class="s2">"./wwwroot/js/"</span>
+<span class="p">}</span>
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">'default'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>		<span class="c1">// default 는 작업명</span>
+    <span class="k">return</span> <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="nx">paths</span><span class="p">.</span><span class="nx">src</span><span class="p">)</span>         	<span class="c1">// Returns a stream</span>
+        	 <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="nx">paths</span><span class="p">.</span><span class="nx">dest</span><span class="p">))</span>   	<span class="c1">// Pipes the stream somewhere</span>
+<span class="p">});</span></code></pre></figure>
+
+<p>이렇게 default라고 정의한 작업을 Task Runner 탐색기를 통해 실행할 수도 있지만 그림 1에서처럼 일반적으로 빌드 이벤트에 바인딩하여 자동으로 수행하게 한다.</p>
+
+<p><a href="/images/post/task-binding.png"><img src="/images/post/task-binding.png" alt="default 작업을 빌드 이벤트에 바인딩" /></a></p>
+
+<p>&lt;그림 1&gt; default 작업을 프로젝트 빌드 후에 수행하도록 설정</p>
+
+<p>Task runner의 지원이 꼭 필요한 Bower라는 또 다른 노드 패키지가 있다. Bower는 Git 위에서 동작하며 jquery, bootstrap, angular를 포함한 35,000 이상의 패키지를 관리하는 웹 패키지 매니저로 알려져 있는데, 생태계의 규모와 task runner와의 좋은 궁합 때문에 클라이언트 단에서 NuGet 패키지보다 Bower가 추천된다.</p>
+
+<p>Bower.json 파일에 등록된 클라이언트 라이브러리들은 bower_components 폴더에 다운로드 되고 task runner를 이용해 wwwroot 폴더로 복사하는 것이 ASP.NET 5 애플리케이션의 전형적인 관리 방식이다.</p>
+
+
+        
+          <div id="disqus_thread"></div><!-- /#disqus_thread -->
+          
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'jakeymvcblog'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://localhost:4000/bye-web-config/" class="btn" title="Bye web.config">Previous</a>
+      
+      
+        <a href="http://localhost:4000/mvc6/" class="btn" title="ASP.NET MVC 6 - 개발의 변화">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2016 Jake Ryu. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	
+	<a href="https://facebook.com/ryu.jihyung" title="Jake Ryu on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	<a href="https://github.com/jakeymvc" title="Jake Ryu on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="http://localhost:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://localhost:4000';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet 
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+ 'https://www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-54850641-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+-->
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54850641-2', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+
+
+
+
+
+</body>
+</html>

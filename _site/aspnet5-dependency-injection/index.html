@@ -1,0 +1,358 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>ASP.NET 5 종속성 주입 (Dependency Injection) &#8211; 제이키의 MVC 이야기</title>
+<meta name="description" content="한 클래스에서 다른 클래스의 인스턴스를 생성하는 방식은 클래스간의 의존성을 만들기 때문에 부분적인 변경이라도 전체적인 영향을 항상 검토해야 한다. 따라서, 클래스 간의 결합은 느슨해야 하고 이렇게 결합력이 약한 애플리케이션은 변경에 유연하게 대처할 수 있다.">
+<meta name="keywords" content="aspnet5, di">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="ASP.NET 5 종속성 주입 (Dependency Injection)">
+<meta name="twitter:description" content="한 클래스에서 다른 클래스의 인스턴스를 생성하는 방식은 클래스간의 의존성을 만들기 때문에 부분적인 변경이라도 전체적인 영향을 항상 검토해야 한다. 따라서, 클래스 간의 결합은 느슨해야 하고 이렇게 결합력이 약한 애플리케이션은 변경에 유연하게 대처할 수 있다.">
+
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/site-logo.gif">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="kr_KR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASP.NET 5 종속성 주입 (Dependency Injection)">
+<meta property="og:description" content="한 클래스에서 다른 클래스의 인스턴스를 생성하는 방식은 클래스간의 의존성을 만들기 때문에 부분적인 변경이라도 전체적인 영향을 항상 검토해야 한다. 따라서, 클래스 간의 결합은 느슨해야 하고 이렇게 결합력이 약한 애플리케이션은 변경에 유연하게 대처할 수 있다.">
+<meta property="og:url" content="http://localhost:4000/aspnet5-dependency-injection/">
+<meta property="og:site_name" content="제이키의 MVC 이야기">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/aspnet5-dependency-injection/">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="제이키의 MVC 이야기 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://localhost:4000/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://localhost:4000/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+
+</head>
+
+<body id="post">
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="http://localhost:4000/about/" >About</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/articles/" >Articles</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/tags/" >Tags</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/search/" >Search</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://localhost:4000/" class="site-logo" rel="home" title="제이키의 MVC 이야기"><img src="http://localhost:4000/images/site-logo.gif" width="200" height="200" alt="제이키의 MVC 이야기 logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://localhost:4000/">제이키의 MVC 이야기</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">웹 개발은 MVC 패턴으로. Angular와 ASP.NET Core의 궁합은?</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="http://localhost:4000/tags/#aspnet5" title="Pages tagged aspnet5">aspnet5</a></li><li><a href="http://localhost:4000/tags/#di" title="Pages tagged di">di</a></li>
+        </ul>
+        
+          <h1 class="entry-title">ASP.NET 5 종속성 주입 (Dependency Injection)</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="http://localhost:4000/images/jake-ryu-photo.jpg" class="bio-photo" alt="Jake Ryu bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Jake Ryu</span></span>
+        <span class="entry-date date published"><time datetime="2015-08-21T11:00:00+01:00"><i class="fa fa-calendar-o"></i> August 21, 2015</time></span>
+        
+        <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+        <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=aspnet5,di&amp;text=ASP.NET%205%20종속성%20주입%20(Dependency%20Injection)&amp;url=http://localhost:4000/aspnet5-dependency-injection/" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/aspnet5-dependency-injection/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<span class="social-share-googleplus">
+  <a href="https://plus.google.com/share?url=http://localhost:4000/aspnet5-dependency-injection/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+</span>
+<!-- /.social-share -->
+        
+      </footer>
+      <div class="entry-content">
+        <p>IT 업계에서 변하지 않는 유일한 것이 있다면 변화 그 자체라는 말이 있다. 그럼에도 불구하고 변화에 유연하게 대처할 수 있는 애플리케이션을 작성하는 일은 쉬운 일이 아니다. 객체지향적으로 클래스가 잘 설계되었다 해도 한 클래스에서 다른 클래스의 인스턴스를 생성하는 방식은 클래스간의 의존성을 만들기 때문에 부분적인 변경이라도 전체적인 영향을 항상 검토해야 한다. 따라서, 클래스 간의 결합은 느슨해야 하고 이렇게 결합력이 약한 애플리케이션은 변경에 유연하게 대처할 수 있다.</p>
+
+<p>‘Program to interface, not implementation’ 라는 중요한 설계 원칙이 있다. 여기서 인터페이스는 일종의 계약이다. 계약은 지켜져야 하고 합의 후 변경할 수 없기 때문에 인터페이스를 사용하는 코드는 구현체인 클래스를 사용하는 코드보다 유지보수에서 유리하다.</p>
+
+<p>인터페이스를 사용하는 코드는 인터페이스 변수에 대입하는 클래스를 바꾸는 것만으로 애플리케이션의 로직을 변경할 수 있다. 그리고, 이런 대입 과정은 로직에서 분리되어야 한다.</p>
+
+<p>아래의 예제 코드는 Ninject라는 종속성 주입 컨테이너를 사용하여 주문과 함께 로깅이 필요한 시나리오의 로깅 모듈이 어떻게 주문 모듈과 결합되어 있는지 보여준다. 종속성 주입 컨테이너에 대해서는 나중에 설명한다.</p>
+
+<p>&lt;리스트 1&gt; 주문시 로깅처리하는 예제</p>
+
+<figure class="highlight"><pre><code class="language-c#" data-lang="c#"><span class="c1">// 종속성 주입 컨테이너 준비
+</span><span class="n">IKernel</span> <span class="n">ninjectKernel</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">StandardKernel</span><span class="p">();</span>
+
+<span class="c1">// ILogger 인터페이스에 XmlLogger를 사용하도록 지정
+</span><span class="n">ninjectKernel</span><span class="p">.</span><span class="n">Bind</span><span class="p">&lt;</span><span class="n">ILogger</span><span class="p">&gt;().</span><span class="n">To</span><span class="p">&lt;</span><span class="n">XmlLogger</span><span class="p">&gt;();</span>
+
+<span class="c1">// 종속성 주입 컨테이너가 바인딩 설정에 기반해서 클래스를 생성하고
+// ILogger 인터페이스 형식 변수에 클래스를 할당한다.
+</span><span class="n">ILogger</span> <span class="n">logger</span> <span class="p">=</span> <span class="n">ninjectKernel</span><span class="p">.</span><span class="n">Get</span><span class="p">&lt;</span><span class="n">ILogger</span><span class="p">&gt;();</span>
+
+<span class="c1">// 주문 클래스를 생성하면서 종속성을 주입한다.
+</span><span class="n">Order</span> <span class="n">o</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Order</span><span class="p">(</span><span class="n">logger</span><span class="p">);</span>
+
+<span class="c1">// 주문 후 처리 결과는 주입된 logger에 의해 기록된다.
+</span><span class="n">o</span><span class="p">.</span><span class="nf">Place</span><span class="p">();</span></code></pre></figure>
+
+<p>코드에 포함되지는 않았지만 Save 라는 메서드를 정의하는 간단한 ILogger 인터페이스가 있고 이를 구현하고 있는 XmlLogger가 사용되었다. 만약, 로깅을 위해 데이터베이스가 필요하다고 판단되면 ILogger를 구현하는 DatabaseLogger 클래스를 만들어서 XmlLogger 대신 바인딩 하면 그만이다.</p>
+
+<p>이런 변경은 로깅을 사용하는 상위 모듈, 즉 Order 클래스를 변경하지 않고 가능해야 좋은 설계라고 할 수 있다.</p>
+
+<p>상위 모듈은 하위 모듈을 사용하면서 어쩔 수 없이 의존성을 갖게 되지만 하위 모듈의 변경이 상위 모듈의 변경으로 이어지는 것은 유지보수를 어렵게 만든다. 이 것이 모듈들을 느슨하게 결합해야 하는 이유이다.</p>
+
+<p>종속성은 비즈니스 로직(여기서는 주문)과 상관없는 실행환경에서 관리되어야 한다. 만약, Order 클래스에서 XmlLogger를 직접 사용한다면 강한 결합이 되어 로깅 모듈 수정시 Order 클래스에 대한 수정을 피할 수 없다. 다시 말해, 상위 모듈이 영향을 받는 셈이다.</p>
+
+<p>Order 클래스의 생성자 또는 세터를 통해 로깅 모듈을 주입하면 외부에서 로깅 모듈을 제어하는 셈이 된다. 이 때 주입하는 것은 인터페이스인데, 이 인터페이스에 어떤 클래스의 인스턴스를 대입해 주는가 하는 것이 종속성 주입 컨테이너의 역할이고 리스트 1의 초반부 설정에 표현되어 있다.</p>
+
+<p>이런 컨테이너로는 예제에서 사용한 Ninject 또는 Autofac 등이 많이 사용되며 마이크로소프트에서도 Unity Container를 NuGet 패키지로 제공해 왔다.</p>
+
+<p>별도 패키지로 설치하고 구성해야 했던 종속성 주입 컨테이너가 MVC 6에 들어서는 프레임워크 수준에서 제공된다. 그렇다고 이 빌트인 컨테이너가 강제화된 것은 아니다. MVC 6는 개발자의 편의를 위해 프레임워크 차원에서 최소 기능의 종속성 주입 컨테이너를 제공할 뿐이다. 보다 강력한 기능이 필요하거나 복잡한 시나리오에서는 자신이 선호하는 컨테이너를 사용하면 된다. 빌트인 컨테이너의 제약점은 후반부에 따로 정리했다.</p>
+
+<p>리스트 2는 MVC 6에서 종속성을 주입하는 방법을 보여주고 있다.</p>
+
+<p>&lt;리스트 2&gt; MVC 6 프레임워크를 사용한 종속성 주입</p>
+
+<figure class="highlight"><pre><code class="language-c#" data-lang="c#"><span class="k">public</span> <span class="k">class</span> <span class="nc">Startup</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Configure</span><span class="p">(</span><span class="n">IBuilder</span> <span class="n">app</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="p">...</span>
+        <span class="n">app</span><span class="p">.</span><span class="nf">UseServices</span><span class="p">(</span><span class="n">services</span> <span class="p">=&gt;</span>
+        <span class="p">{</span>
+            <span class="p">...</span>
+            <span class="c1">// 종속성 설정
+</span>            <span class="n">services</span><span class="p">.</span><span class="n">AddTransient</span><span class="p">&lt;</span><span class="n">ILogger</span><span class="p">,</span> <span class="n">XmlLogger</span><span class="p">&gt;();</span>
+            <span class="p">...</span>
+        <span class="p">});</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">UseServices</code> 메서드는 그 이름에서 느껴지듯 서비스를 사용한다는 의미일텐데, 서비스를 추가하는 모양새가 종속성 주입의 형태를 갖는다. 서비스와 종속성은 어떤 관계일까.</p>
+
+<p>서비스는 애플리케이션에서 공통으로 사용하도록 의도한 컴포넌트이다. 이런 서비스들은 종속성 주입을 통해서 사용 가능한데 아마도 이 때문에 종속성 주입 컨테이너가 빌트인으로 제공되는 것 같다. 이 컨테이너가 제공하는 서비스의 수명 관리방식은 세 가지다.</p>
+
+<ul>
+  <li>Singleton</li>
+  <li>Scoped  (현재 스콥에 존재하는 서비스가 없을 때만 서비스를 생성)</li>
+  <li>Transient (컨테이너의 의해 서비스가 요청될 때마다 서비스 생성)</li>
+</ul>
+
+<p>웹 애플리케이션에서 컨테이너 스콥은 요청마다 생성되므로 Scoped 서비스는 per request 서비스라고 생각할 수 있다.</p>
+
+<p>현재 버전에서 빌트인 컨테이너는 다음과 같은 제약이 있다.</p>
+
+<ul>
+  <li>생성자를 통한 종속성 주입만 지원</li>
+  <li>오직 하나의 PUBLIC 생성자를 갖는 클래스만 이해</li>
+  <li>스레드 스콥, 오토 디스커버리 같은 고급 기능 지원 못함</li>
+</ul>
+
+<p>반면에 이전에 불가능했던 것이 가능한 것도 있다. 이 것은 종속성 주입 컨테이너 구현을 추상화한 <code class="highlighter-rouge">IServiceProvider</code> 인터페이스 덕분이다. 프레임워크 컴포넌트들(MVC, Routing, SignalR, Entity Framework 등)은 <code class="highlighter-rouge">IServiceProvider</code> 를 구현하는 종속성 주입 컨테이너를 사용하기 때문에 컴포넌트간을 넘나 드는, 다시 말해 스택을 가로지르는 종속성을 갖을 수 있다. 서비스를 등록하기 위해 하나의 컨테이너를 사용하기 때문에 로깅 모듈을 스택의 다른 레이어마다 반복적으로 정의하지 않고 하나의 엔트리만으로 해결이 가능하고, MVC 컨트롤러 액션 메서드에 SignalR 브로드캐스터를 주입하는 것도 가능하다.</p>
+
+<p>현재도 한창 개발중인 프레임워크라 예제를 들어 설명하지 못하는 것이 아쉽지만 다음을 기약해 본다.</p>
+
+<p>이 빌트인 컨테이너는 고급 설정까지 필요없는 간단한 시나리오에서 하나의 컨테이너로 여러 가지 서비스를 관리한다는 목적으로 사용하는 것이 좋을 것 같다.</p>
+
+<h4 id="section">[참고 자료]</h4>
+
+<ul>
+  <li>
+    <p><a href="http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx">Dependency Injection in ASP.NET vNext</a></p>
+  </li>
+  <li>
+    <p>[Introduction to ASP.NET 5]
+(http://docs.asp.net/en/latest/conceptual-overview/aspnet.html?highlight=dependency#services)</p>
+  </li>
+</ul>
+
+
+        
+          <div id="disqus_thread"></div><!-- /#disqus_thread -->
+          
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'jakeymvcblog'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://localhost:4000/taghelpers/" class="btn" title="태그 헬퍼 (TagHelpers)">Previous</a>
+      
+      
+        <a href="http://localhost:4000/docs-asp-net/" class="btn" title="docs.asp.net 번역">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2016 Jake Ryu. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	
+	<a href="https://facebook.com/ryu.jihyung" title="Jake Ryu on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	<a href="https://github.com/jakeymvc" title="Jake Ryu on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="http://localhost:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://localhost:4000';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet 
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+ 'https://www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-54850641-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+-->
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54850641-2', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+
+
+
+
+
+</body>
+</html>
