@@ -3,7 +3,7 @@
   
     {
       "title"			: "닷넷의 미래",
-      "link"			: "http://localhost:4000/dotnet-tomorrow",
+      "link"			: "http://blog.jakeymvc.com/dotnet-tomorrow",
       "excerpt"		: "Microsoft는 닷넷을 어느 곳에서든지 개발하고 운영할 수 있도록 새로운 플랫폼을 개발해 왔고 기존 플랫폼을 포함하여 모든 플랫폼을 정돈하는 과정에 있다. 이런 변화가 닷넷 개발자에게 어떤 의미를 갖는가?"
     }
   
@@ -11,7 +11,7 @@
   
     ,{
       "title"			: "MVC 확장 - 테마 지원을 위한 Custom View Engine",
-      "link"			: "http://localhost:4000/mvc-extension-theme",
+      "link"			: "http://blog.jakeymvc.com/mvc-extension-theme",
       "excerpt"		: "중요 버튼의 색상과 크기를 변경하는 것, 입력 요소들을 세로 배열에서 가로 배열로 변환하는 등 다양한 시도를 하는데 이를 Conversion Optimization 이라고 한다."
     }
   
@@ -19,7 +19,7 @@
   
     ,{
       "title"			: "MVC 확장 - HTML 헬퍼",
-      "link"			: "http://localhost:4000/mvc-extension-html-helper",
+      "link"			: "http://blog.jakeymvc.com/mvc-extension-html-helper",
       "excerpt"		: "Custom 객체를 만들거나 헬퍼 메서드를 작성하는 데에는 크게 두 가지 이점이 있다. 첫 째로, 반복되는 내용을 캡슐화하여 코드를 간결하게 유지할 수 있고 두 번째로, 캡슐화된 기능은 쉽게 재사용할 수 있다."
     }
   
@@ -27,7 +27,7 @@
   
     ,{
       "title"			: "MVC 확장 - Action Filter",
-      "link"			: "http://localhost:4000/mvc-extension-action-filter",
+      "link"			: "http://blog.jakeymvc.com/mvc-extension-action-filter",
       "excerpt"		: "컨트롤러의 핵심 요소인 액션과 액션 결과(Action Result)에는 필터 어트리뷰트를 적용할 수 있는데 이를 액션 필터, 결과 필터라고 한다. 이 필터들을 MVC 요청 파이프라인의 흐름에 간섭할 수 있는 확장 포인트로 삼을 수 있다."
     }
   
@@ -35,7 +35,7 @@
   
     ,{
       "title"			: "MVC 확장 - Action Result",
-      "link"			: "http://localhost:4000/mvc-extension-action-result",
+      "link"			: "http://blog.jakeymvc.com/mvc-extension-action-result",
       "excerpt"		: "MVC 애플리케이션을 다루다 보면 확장이 쉽다는 것을 알 수 있다. 단위 테스트를 염두에 두고 프레임워크 자체가 모듈화되었기 때문에 얻는 잇점이라고 할 수 있다. 좋은 구조로 설계하고 구현하는 것은 시간과 정성이 필요한 일이지만 여러 가지로 그 노력에 대한 보상이 돌아온다."
     }
   
@@ -43,7 +43,7 @@
   
     ,{
       "title"			: "ASP.NET 5가 좋은 다섯 가지 이유",
-      "link"			: "http://localhost:4000/five-reasons-to-love-aspnet5",
+      "link"			: "http://blog.jakeymvc.com/five-reasons-to-love-aspnet5",
       "excerpt"		: "ASP.NET 5 RC1 이 예정대로 2015년 11월에 Connect() 행사 시점에 맞추어 배포되었다. RC 버전에 들어서면 사용자 피드백을 통한 안정화 단계에 접어든 것이므로 기능적인 추가와 변경이 없다고 한다. 베타버전이라 아직 망설였다면 이제 슬슬 시작해보는 것은 어떨까. ASP.NET 5가 좋은 이유를 다섯 가지로 정리해 봤다."
     }
   
@@ -51,7 +51,7 @@
   
     ,{
       "title"			: "값 공급자 (Value Provider)",
-      "link"			: "http://localhost:4000/value-provider/",
+      "link"			: "http://blog.jakeymvc.com/value-provider/",
       "excerpt"		: "모델 바인더의 목표가 모델을 제공하는데 있지만 모델을 구성하는 값을 어디서 어떻게 가져오는지는 알지 못한다. HTTP 요청에서 값을 추출하는 일은 값 공급자의 몫이다."
     }
   
@@ -59,7 +59,7 @@
   
     ,{
       "title"			: "모델 바인딩 (Custom Model Binding)",
-      "link"			: "http://localhost:4000/model-binding/",
+      "link"			: "http://blog.jakeymvc.com/model-binding/",
       "excerpt"		: "모델 바인딩이란 브라우저가 HTTP 요청에 담아서 전달한 데이터를 이용해 .NET 객체를 생성하는 과정을 말한다. MVC 프레임워크는 요청 값을 분석하여 액션 메서드에 필요한 매개변수 형식을 생성하고 값을 할당한다."
     }
   
@@ -67,7 +67,7 @@
   
     ,{
       "title"			: "유효성 검사 모델 (MVC Validation)",
-      "link"			: "http://localhost:4000/validation-model/",
+      "link"			: "http://blog.jakeymvc.com/validation-model/",
       "excerpt"		: "웹 페이지를 통해 사용자 입력 값을 받다보면 꼭 필요하면서도 성가신 것이 유효성 검사(validation)이다. ASP.NET MVC와 Web API는 아주 유연하면서도 사려 깊은 유효성 검사 모델을 제공한다."
     }
   
@@ -75,7 +75,7 @@
   
     ,{
       "title"			: "docs.asp.net 번역",
-      "link"			: "http://localhost:4000/docs-asp-net/",
+      "link"			: "http://blog.jakeymvc.com/docs-asp-net/",
       "excerpt"		: "ASP.NET 5는 2016년 초쯤에나 정식 발표될 예정이고 아직 그렇다할 학습자료는 많지 않다. 화제가 화제인 만큼 ASP.NET 5의 변화를 얘기하는 블로그는 많지만 전체적인 내용을 다루는 곳을 찾기는 힘들다. 그도 그럴것이 개인이 접근하기에는 변화의 양이나 질적인 측면에서 학습할 내용이 무척이나 많다."
     }
   
@@ -83,7 +83,7 @@
   
     ,{
       "title"			: "ASP.NET 5 종속성 주입 (Dependency Injection)",
-      "link"			: "http://localhost:4000/aspnet5-dependency-injection/",
+      "link"			: "http://blog.jakeymvc.com/aspnet5-dependency-injection/",
       "excerpt"		: "한 클래스에서 다른 클래스의 인스턴스를 생성하는 방식은 클래스간의 의존성을 만들기 때문에 부분적인 변경이라도 전체적인 영향을 항상 검토해야 한다. 따라서, 클래스 간의 결합은 느슨해야 하고 이렇게 결합력이 약한 애플리케이션은 변경에 유연하게 대처할 수 있다."
     }
   
@@ -91,7 +91,7 @@
   
     ,{
       "title"			: "태그 헬퍼 (TagHelpers)",
-      "link"			: "http://localhost:4000/taghelpers/",
+      "link"			: "http://blog.jakeymvc.com/taghelpers/",
       "excerpt"		: "TagHelpers는 이전 버전의 HtmlHelpers와 비교할 수 있는데 둘 다 HTML을 동적으로 생성한다는 동일한 목표를 갖고 있다."
     }
   
@@ -99,7 +99,7 @@
   
     ,{
       "title"			: "ASP.NET MVC 6 - 개발의 변화",
-      "link"			: "http://localhost:4000/mvc6/",
+      "link"			: "http://blog.jakeymvc.com/mvc6/",
       "excerpt"		: "마이크로소프트는 제품의 영향력에 비해 브랜딩이 취약하다는 힐난을 종종 받는다. ASP.NET 5에 대해서도 브랜딩에 대한 개발자들의 불평이 많다. ASP.NET 5 라는 작명을 보면 그 엄청난 변화에 대한 임팩트를 담지 못했고, 새로운 버전의 MVC 6를 표현할 때, 서로 다른 숫자에 의한 부자연스러움이 있기 때문이다."
     }
   
@@ -107,7 +107,7 @@
   
     ,{
       "title"			: "태스크 러너 (Task Runner)",
-      "link"			: "http://localhost:4000/task-runner/",
+      "link"			: "http://blog.jakeymvc.com/task-runner/",
       "excerpt"		: "자바스크립트의 비약적인 발전으로 현대의 웹 개발은 클라이언트 단에서 다양한 일을 효과적으로 수행하고 있다. 모던 웹을 작성한다고 할 때 어떤 일들이 필요한가."
     }
   
@@ -115,7 +115,7 @@
   
     ,{
       "title"			: "Bye web.config",
-      "link"			: "http://localhost:4000/bye-web-config/",
+      "link"			: "http://blog.jakeymvc.com/bye-web-config/",
       "excerpt"		: "ASP.NET 5와 함께 web.config 파일에 있던 프로젝트 관련 설정은 project.json 파일로 이동하였고, 개발자를 위해서 Key-Value 쌍을 관리하는 깔끔한 설정(configuration) 모델이 새롭게 도입되었다."
     }
   
@@ -123,7 +123,7 @@
   
     ,{
       "title"			: "project.json",
-      "link"			: "http://localhost:4000/project-json/",
+      "link"			: "http://blog.jakeymvc.com/project-json/",
       "excerpt"		: "project.json 파일은 ASP.NET 5 프레임워크에서 새로 도입된 프로젝트 설정 파일이다."
     }
   
@@ -131,7 +131,7 @@
   
     ,{
       "title"			: "ASP.NET 5 솔루션 구조",
-      "link"			: "http://localhost:4000/aspnet5-solution-structure/",
+      "link"			: "http://blog.jakeymvc.com/aspnet5-solution-structure/",
       "excerpt"		: "ASP.NET 5에서는 솔루션의 구조가 완전히 바뀌었다. 비주얼 스튜디오가 제공하는 템플릿을 이전 버전과 비교하면서 그 변화를 알아본다."
     }
   
@@ -139,7 +139,7 @@
   
     ,{
       "title"			: "ASP.NET 5 미들웨어",
-      "link"			: "http://localhost:4000/middleware/",
+      "link"			: "http://blog.jakeymvc.com/middleware/",
       "excerpt"		: "ASP.NET 5의 http 요청 처리는 Node.js 스타일의 raw socket 과 유사하게 변경되었고 단지 3KB의 메모리만을 차지한다. 이렇게 90% 감소된 메모리 사용은 로딩 타임을 줄여 사용자 요청에 빠르게 응대하고 동시에 더 많은 요청을 처리할 수 있게 해준다. 이런 성능 향상의 배경에 미들웨어가 있다."
     }
   
@@ -147,7 +147,7 @@
   
     ,{
       "title"			: "병렬 수행과 크로스 플랫폼",
-      "link"			: "http://localhost:4000/cross-platform/",
+      "link"			: "http://blog.jakeymvc.com/cross-platform/",
       "excerpt"		: "윈도우 2003 서버에는 닷넷 프레임워크 4.5를 설치할 수 없다. 닷넷 프레임워크는 이전 버전과 호환성을 유지하면서 새로운 기능을 추가하는 방식으로 발전해 왔고 이런 방식에는 여러 가지 내부적인 문제가 있었다. 변경, 확장이 어렵기 때문에 어쩔 수 없이 호환성을 포기해야 하는 시점이 필요했을 것이다."
     }
   
@@ -155,7 +155,7 @@
   
     ,{
       "title"			: "닷넷 코어 (.NET Core)",
-      "link"			: "http://localhost:4000/net-core/",
+      "link"			: "http://blog.jakeymvc.com/net-core/",
       "excerpt"		: "닷넷 코어는 모놀리식(monolithic) 닷넷 프레임워크를 모듈화하고자 하는 접근법에서 비롯되었다. 닷넷 코어는 닷넷 코어 런타임인 CoreCLR과 닷넷 코어 라이브러리인 CoreFX로 구성되고 이들은  버티컬에서 각각 런타임과 프레임워크에 해당한다."
     }
   
@@ -163,7 +163,7 @@
   
     ,{
       "title"			: "ASP.NET 5 - REBOOT",
-      "link"			: "http://localhost:4000/aspnet5reboot/",
+      "link"			: "http://blog.jakeymvc.com/aspnet5reboot/",
       "excerpt"		: "2014년 2월 취임한 사티아 나델라(Satya Nadella), 마이크로소프트의 최고경영자는 ‘모바일 퍼스트, 클라우드 퍼스트(Mobile First, Cloud First)’라는 비전과 함께 변화를 주도했다. 아이패드용 오피스를 출시하고 일부 제품을 무료로 전환하고 닷넷 프레임워크의 소스를 공개하는 등, 이전의 MS라면 상상할 수 없던 변화를 보여줬다. 이 비전엔 어떤 의미가 있을까."
     }
   
@@ -171,7 +171,7 @@
   
     ,{
       "title"			: "간단한 SSO #4 - 위조방지 HMAC",
-      "link"			: "http://localhost:4000/sso-hmac/",
+      "link"			: "http://blog.jakeymvc.com/sso-hmac/",
       "excerpt"		: "사이트를 이동할 때, 예를 들어 SSO을 위해 사용자 정보(예: User ID)를 전달한다고 가정하자. 이전 글을 통해서 User ID를 암호화 하는 과정을 알아봤다. 사용된 암호화 알고리즘과 사용된 키를 모른다면 다른 User ID로 가장하는 것은 불가능한 일이다."
     }
   
@@ -179,7 +179,7 @@
   
     ,{
       "title"			: "간단한 SSO #3 - 암호화",
-      "link"			: "http://localhost:4000/sso-encryption/",
+      "link"			: "http://blog.jakeymvc.com/sso-encryption/",
       "excerpt"		: "암호화는 그 자체로 하나의 큰 주제이다. 여러 가지의 암호화 기술이 있고 발전해 온 역사도 길어서 대학에서 한 학기 강의로 다룰 정도로 내용이 방대하다. 이 글에서는 암호화의 원천적인 기술에 대해서는 가볍게 설명하고 소스 위주로 그 사용에 대해 자세해 알아보겠다."
     }
   
@@ -187,7 +187,7 @@
   
     ,{
       "title"			: "간단한 SSO #2 - 라우팅",
-      "link"			: "http://localhost:4000/sso-routing/",
+      "link"			: "http://blog.jakeymvc.com/sso-routing/",
       "excerpt"		: "MVC 애플리케이션은 RouteConfig 클래스에서 라우팅에 대한 모든 것을 관리한다. Global.asax 파일의 Application_Start 메서드를 보면 아래 코드와 같이 RouteConfig 클래스의 정적 메서드, RegisterRoutes 를 호출 하면서 RouteTable 의 Routes 속성을 전달하는데 이 속성은 RouteCollection 클래스의 인스턴스이다.  RegisterRoute 메서드에서 진행할 라우트 구성을 위해 컬렉션을 전달하는 시점이므로 컬렉션의 내용은 비어있다."
     }
   
@@ -195,7 +195,7 @@
   
     ,{
       "title"			: "간단한 SSO #1 - 접근법",
-      "link"			: "http://localhost:4000/sso-approach/",
+      "link"			: "http://blog.jakeymvc.com/sso-approach/",
       "excerpt"		: "앞으로 네 편의 글을 통해 웹 페이지간에 데이터를 교환하면서 그 내용을 노출하지 않고 위변조도 방지할 수 있는 기법을 알아볼 것이다. 암호화(Cryptography)와 HMAC(Hash-based Message Authentication)이 그 핵심 기술인데, 이 두가지 기법을 응용하면 데이터를 안전하게 전달할 수 있다. 대표적인 예로, 웹 사이트간에 추가적인 로그인 과정을 피할 수 있는 Single Sign-On 을 구현해 보고자 한다."
     }
   
@@ -203,7 +203,7 @@
   
     ,{
       "title"			: "Zip 파일 반환하는 ActionResult 만들기",
-      "link"			: "http://localhost:4000/action-result-to-return-zip-file/",
+      "link"			: "http://blog.jakeymvc.com/action-result-to-return-zip-file/",
       "excerpt"		: "이미지 뷰어를 구현하다 다운로드 기능이 필요해졌다. 한 번 클릭에 뷰어에서 재생되는 모든 이미지를 압축하여 다운로드 한다. 아무래도 압축 풀기의 번거로움이 있으니 이미지가 하나만 있다면 압축 없이 다운로드할 수 있게 해보자."
     }
   
@@ -211,7 +211,7 @@
   
     ,{
       "title"			: "ASP.NET MVC를 사용해야 하는 다섯가지 이유",
-      "link"			: "http://localhost:4000/five-reasons-to-use-mvc/",
+      "link"			: "http://blog.jakeymvc.com/five-reasons-to-use-mvc/",
       "excerpt"		: "웹폼과 MVC를 비교하는 많은 아티클에서 공통적으로 맺는 말은 두 기술은 어느 한 기술이 다른 것을 대치하는 것이 아니라는 것이다. MVC가 좋다는 뉘앙스를 감추지 못하면서도 웹폼을 버리라고 과감하게 말하는 사람은 드물다. 웹폼이 제공하는 다양한 서버 컨트롤과 뷰 스테이트는 생산성 향상에 큰 도움이 되고 있는걸 알기 때문이다. 그럼에도 불구하고 MVC가 주목받는 이유는 무엇일까?"
     }
   
@@ -227,7 +227,7 @@
   
     ,{
       "title"			: "제이키의 MVC 이야기",
-      "link"			: "http://localhost:4000/about/",
+      "link"			: "http://blog.jakeymvc.com/about/",
       "excerpt"		: ""
     }
   
@@ -239,7 +239,7 @@
   
     ,{
       "title"			: "Theme Setup",
-      "link"			: "http://localhost:4000/theme-setup/",
+      "link"			: "http://blog.jakeymvc.com/theme-setup/",
       "excerpt"		: "Instructions on how to install and customize the Jekyll theme So Simple."
     }
   
