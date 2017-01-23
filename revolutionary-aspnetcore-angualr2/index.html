@@ -6,13 +6,13 @@
 <head>
 <meta charset="utf-8">
 <title>Revolutionary ASP.NET Core & Angular 2 &#8211; 제이키의 MVC 이야기</title>
-<meta name="description" content="웹폼과 MVC를 비교하는 많은 아티클에서 공통적으로 맺는 말은 두 기술은 어느 한 기술이 다른 것을 대치하는 것이 아니라는 것이다. MVC가 좋다는 뉘앙스를 감추지 못하면서도 웹폼을 버리라고 과감하게 말하는 사람은 드물다. 웹폼이 제공하는 다양한 서버 컨트롤과 뷰 스테이트는 생산성 향상에 큰 도움이 되고 있는걸 알기 때문이다. 그럼에도 불구하고 MVC가 주목받는 이유는 무엇일까?">
+<meta name="description" content="ASP.NET 과 Angular는 각자의 위치에서 웹 개발의 주류(main stream) 프레임워크로 많이 사용되어 왔다. 최근 이 두개의 프레임워크는 바닥부터 새로 작성되었다. 닷넷 프레임워크는 비대해진 크기와 그로 인한 새 버전 릴리즈 지연이 클라우드와 모바일 환경에 적합하지 않기 때문이었고...">
 <meta name="keywords" content="aspnet-core, angualr2">
 
 
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Revolutionary ASP.NET Core & Angular 2">
-<meta name="twitter:description" content="웹폼과 MVC를 비교하는 많은 아티클에서 공통적으로 맺는 말은 두 기술은 어느 한 기술이 다른 것을 대치하는 것이 아니라는 것이다. MVC가 좋다는 뉘앙스를 감추지 못하면서도 웹폼을 버리라고 과감하게 말하는 사람은 드물다. 웹폼이 제공하는 다양한 서버 컨트롤과 뷰 스테이트는 생산성 향상에 큰 도움이 되고 있는걸 알기 때문이다. 그럼에도 불구하고 MVC가 주목받는 이유는 무엇일까?">
+<meta name="twitter:description" content="ASP.NET 과 Angular는 각자의 위치에서 웹 개발의 주류(main stream) 프레임워크로 많이 사용되어 왔다. 최근 이 두개의 프레임워크는 바닥부터 새로 작성되었다. 닷넷 프레임워크는 비대해진 크기와 그로 인한 새 버전 릴리즈 지연이 클라우드와 모바일 환경에 적합하지 않기 때문이었고...">
 
 
 
@@ -23,7 +23,7 @@
 <meta property="og:locale" content="kr_KR">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Revolutionary ASP.NET Core & Angular 2">
-<meta property="og:description" content="웹폼과 MVC를 비교하는 많은 아티클에서 공통적으로 맺는 말은 두 기술은 어느 한 기술이 다른 것을 대치하는 것이 아니라는 것이다. MVC가 좋다는 뉘앙스를 감추지 못하면서도 웹폼을 버리라고 과감하게 말하는 사람은 드물다. 웹폼이 제공하는 다양한 서버 컨트롤과 뷰 스테이트는 생산성 향상에 큰 도움이 되고 있는걸 알기 때문이다. 그럼에도 불구하고 MVC가 주목받는 이유는 무엇일까?">
+<meta property="og:description" content="ASP.NET 과 Angular는 각자의 위치에서 웹 개발의 주류(main stream) 프레임워크로 많이 사용되어 왔다. 최근 이 두개의 프레임워크는 바닥부터 새로 작성되었다. 닷넷 프레임워크는 비대해진 크기와 그로 인한 새 버전 릴리즈 지연이 클라우드와 모바일 환경에 적합하지 않기 때문이었고...">
 <meta property="og:url" content="http://blog.jakeymvc.com/revolutionary-aspnetcore-angualr2/">
 <meta property="og:site_name" content="제이키의 MVC 이야기">
 
@@ -190,7 +190,7 @@ Angular 2의 RC 2버전과 RC 5버전에서 breaking changes 가 있어 고생�
 
 <p>JavaScript는 ECMAScript 표준을 따른다. 이 표준이 업데이트되면서 언어적 기능이 새로 추가되었을때, 이 기능을 지원하기 위해 브라우저가 업데이트되기까지는 시간적 차이가 존재한다. 이런 간극이 존재할 때, TypeScript의 가치가 빛을 발한다. TypeScript를 사용해 새로운 언어적 기능을 사용하면서도 브라우저가 이해할 수 있는 ECMAScript 버전으로 다운레벨 트랜스파일할 수 있기 때문이다.</p>
 
-<p><img src="/images/post/typescript-es6-es5.png" alt="Typescript is supersest" /></p>
+<p><img src="/images/post/typescript-es6-es5.png" alt="TypeScript is supersest of JavaScript" /></p>
 
 <p>Anders Hejlsberg 가 TypeScript를 만든 배경과 2.0 버전에서 지원하는 기능에 대해 마이크로소프트 <a href="https://channel9.msdn.com/Blogs/Seth-Juarez/Anders-Hejlsberg-on-TypeScript-2">채널 9</a>에서 이야기하고 있다.</p>
 
