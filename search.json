@@ -2,6 +2,14 @@
 
   
     {
+      "title"			: "앵귤러와 서버",
+      "link"			: "http://blog.jakeymvc.com/angular-and-server/",
+      "excerpt"		: "앵귤러 애플리케이션을 만들 때, 서버단 애플리케이션과 어떻게 통합해야 할까? 선택 가능한 어떤 옵션이 있고 또, 그 선택이 맞는지 어떻게 알 수 있을까? 이런 주제는 앵귤러 위주의 자료들에서 종종 쉽게 지나치는 문제이다. 한편으로, 서버단을 다루는 글에서는 독자가 이미 강력한 프론트엔드 프레임워크를 사용하고 있다는 가능성을 배제하고 서버단 기능만을 강조한다."
+    }
+  
+
+  
+    ,{
       "title"			: "Revolutionary ASP.NET Core & Angular 2",
       "link"			: "http://blog.jakeymvc.com/revolutionary-aspnetcore-angualr2/",
       "excerpt"		: "ASP.NET 과 Angular는 각자의 위치에서 웹 개발의 주류(main stream) 프레임워크로 많이 사용되어 왔다. 최근 이 두개의 프레임워크는 바닥부터 새로 작성되었다. 닷넷 프레임워크는 비대해진 크기와 그로 인한 새 버전 릴리즈 지연이 클라우드와 모바일 환경에 적합하지 않기 때문이었고…"

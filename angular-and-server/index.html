@@ -1,0 +1,344 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>앵귤러와 서버 &#8211; 제이키의 MVC 이야기</title>
+<meta name="description" content="앵귤러 애플리케이션을 만들 때, 서버단 애플리케이션과 어떻게 통합해야 할까? 선택 가능한 어떤 옵션이 있고 또, 그 선택이 맞는지 어떻게 알 수 있을까? 이런 주제는 앵귤러 위주의 자료들에서 종종 쉽게 지나치는 문제이다. 한편으로, 서버단을 다루는 글에서는 독자가 이미 강력한 프론트엔드 프레임워크를 사용하고 있다는 가능성을 배제하고 서버단 기능만을 강조한다.">
+<meta name="keywords" content="angualr2">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="앵귤러와 서버">
+<meta name="twitter:description" content="앵귤러 애플리케이션을 만들 때, 서버단 애플리케이션과 어떻게 통합해야 할까? 선택 가능한 어떤 옵션이 있고 또, 그 선택이 맞는지 어떻게 알 수 있을까? 이런 주제는 앵귤러 위주의 자료들에서 종종 쉽게 지나치는 문제이다. 한편으로, 서버단을 다루는 글에서는 독자가 이미 강력한 프론트엔드 프레임워크를 사용하고 있다는 가능성을 배제하고 서버단 기능만을 강조한다.">
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://blog.jakeymvc.com/images/so-simple-sample-image-2.jpg">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="kr_KR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="앵귤러와 서버">
+<meta property="og:description" content="앵귤러 애플리케이션을 만들 때, 서버단 애플리케이션과 어떻게 통합해야 할까? 선택 가능한 어떤 옵션이 있고 또, 그 선택이 맞는지 어떻게 알 수 있을까? 이런 주제는 앵귤러 위주의 자료들에서 종종 쉽게 지나치는 문제이다. 한편으로, 서버단을 다루는 글에서는 독자가 이미 강력한 프론트엔드 프레임워크를 사용하고 있다는 가능성을 배제하고 서버단 기능만을 강조한다.">
+<meta property="og:url" content="http://blog.jakeymvc.com/angular-and-server/">
+<meta property="og:site_name" content="제이키의 MVC 이야기">
+
+
+
+
+
+<link rel="canonical" href="http://blog.jakeymvc.com/angular-and-server/">
+<link href="http://blog.jakeymvc.com/feed.xml" type="application/atom+xml" rel="alternate" title="제이키의 MVC 이야기 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://blog.jakeymvc.com/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://blog.jakeymvc.com/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://blog.jakeymvc.com/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://blog.jakeymvc.com/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://blog.jakeymvc.com/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://blog.jakeymvc.com/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://blog.jakeymvc.com/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://blog.jakeymvc.com/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://blog.jakeymvc.com/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://blog.jakeymvc.com/images/apple-touch-icon-144x144-precomposed.png">
+
+
+</head>
+
+<body id="post">
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="http://blog.jakeymvc.com/about/" >About</a></li>
+		  
+		    
+		    <li><a href="http://blog.jakeymvc.com/articles/" >Articles</a></li>
+		  
+		    
+		    <li><a href="http://blog.jakeymvc.com/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="http://blog.jakeymvc.com/tags/" >Tags</a></li>
+		  
+		    
+		    <li><a href="http://blog.jakeymvc.com/search/" >Search</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	
+		<div class="wrap">
+			<a href="http://blog.jakeymvc.com/" class="site-logo" rel="home" title="제이키의 MVC 이야기"><img src="http://blog.jakeymvc.com/images/site-logo.gif" width="200" height="200" alt="제이키의 MVC 이야기 logo" class="animated fadeInDown"></a>
+		</div>
+	
+</header><!-- /.masthead -->
+
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <img src="http://blog.jakeymvc.com/images/so-simple-sample-image-2.jpg" class="entry-feature-image" alt="앵귤러와 서버" >
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="http://blog.jakeymvc.com/tags/#angualr2" title="Pages tagged angualr2">angualr2</a></li>
+        </ul>
+        
+          <h1 class="entry-title">앵귤러와 서버</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="http://blog.jakeymvc.com/images/jake-ryu-photo.jpg" class="bio-photo" alt="Jake Ryu bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Jake Ryu</span></span>
+        <span class="entry-date date published"><time datetime="2017-03-14T00:00:00+00:00"><i class="fa fa-calendar-o"></i> March 14, 2017</time></span>
+        
+        <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+        <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=angualr2&amp;text=앵귤러와%20서버&amp;url=http://blog.jakeymvc.com/angular-and-server/" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://blog.jakeymvc.com/angular-and-server/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<span class="social-share-googleplus">
+  <a href="https://plus.google.com/share?url=http://blog.jakeymvc.com/angular-and-server/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+</span>
+<!-- /.social-share -->
+        
+      </footer>
+      <div class="entry-content">
+        <blockquote>
+  <p>이 글은 저자의 동의를 얻어 번역한 글이다. <a href="http://angularfirst.com/angular-and-the-server/">원문</a>이 있는 블로그에는 마이크로소프트 스택에서 앵귤러를 다루는 좋은 글들이 많이 있다.</p>
+</blockquote>
+
+<p>비주얼스튜디오가 제공하는 스타터 프로젝트는 UI 렌더링, 인증, 데이터를 다루는 샘플 API 등  모든 것을 기본으로 포함한다. 이런 설정이 시작시 좋은 출발점이긴 하지만 자신의 애플리케이션을 위한 최고의 디자인이라고 하기는 어려울 것이다.</p>
+
+<p>앵귤러 애플리케이션을 만들 때, 서버단 애플리케이션과 어떻게 통합해야 할까? 선택 가능한 어떤 옵션이 있고 또, 그 선택이 맞는지 어떻게 알 수 있을까? 이런 주제는 앵귤러 위주의 자료들에서 종종 쉽게 지나치는 문제이다. 한편으로, 서버단을 다루는 글에서는 독자가 이미 강력한 프론트엔드 프레임워크를 사용하고 있다는 가능성을 배제하고 서버단 기능만을 강조한다.</p>
+
+<p>이 글은 애플리케이션의 책임 또는 역할을 따져보고, 그 것을 호스트 애플리케이션과 통합하는 관점에서 몇 가지 그룹으로 나누어 보겠다. 이 글의 목적상, 호스트 애플리케이션이라 함은 서버단 애플리케이션으로써 앵귤러 애플리케이션의 하단에 위치하여 브라우저에 내용을 전달하는 애플리케이션이다 (앵귤러 하단에는 사실 아무것도 존재하지 않을수도 있다). 앵귤러 애플리케이션은 TypeScript 또는 JavaScript 만으로 작성이 가능하며 또는, 둘다 사용할 수도 있다.</p>
+
+<h2 id="section">레벨 0 – 서버 없는 애플리케이션</h2>
+
+<p>서버단에 의존하지 않고도 구현이 가능한 기능만을 포함하는 레벨이다. 이 의미는 애플리케이션이 동작할 때, 앵귤러가 기능함에 있어 어떤 로직도 서버단의 도움없이 처리한다는 것이다. 이런 구성은 정적 파일만을 호스팅하는 것이 배포 또는 운영상 유리할 때 바람직하다.</p>
+
+<p>런타임시 서버단의 종속성이 전혀 없다하더라도, 애플리케이션을 최적화하기 위한 빌드의 장점을 누릴 수 있다. 이런 것들은 서버단 백엔드 없이도 구성할 수 있는 기능들이다. (역주: Webpack이 좋은 예다. TypeScript 로 작성된 앵귤러 앱을 JavaScript 로 빌드하면서 동시에 bundling, minification 등 필요한 일을 할 수 있다)</p>
+
+<h4 id="section-1">라우팅</h4>
+
+<p>앵귤러 라우터는 해시(hash; #) URL 스타일로 구성될 수 있다. 이런 구성에서 각 라우터는 해시 심볼(#) 뒤의 URL로 표현된다. example.com/#/about or example.com/#/products/1 과 같은 것이 그 예다. 애플리케이션이 로딩되면서 라우터가 동작하고 사용자의 요청을 뷰로 네비게이트한다.</p>
+
+<h4 id="section-2">국제화; 다국어 지원</h4>
+
+<p>앵귤러는 다국어 지원을 위한 유팉리티를 갖고 있다. 다국어 처리를 위해 거쳐야 할 몇가지 단계가 <a href="https://angular.io/docs/ts/latest/cookbook/i18n.html">문서</a>로 정리되어 있다. 결론적으로 말해서, 국제화에 대응하는 여러 가지 버전이 국가별 폴더에 정적 파일로 배포된다. 이 시점에서 사용자들의 로케일 버전으로 라우팅하는데 몇가지 옵션이 있다. UI에서 사용자들이 직접 언어를 선택하거나 또는, 사용자 브라우저의 언어 설정에 따라 자동으로 라우팅할 수 있다.</p>
+
+<h4 id="section-3">뷰 렌더링</h4>
+
+<p>앵귤러 프레임워크의 첫번째 하일라이트는 렌더링이다. 자바스크립트 객체를 템플릿에 바인딩하여 데이터를 확인하고 이벤트 바인딩으로 변화를 알아내는 것은 거의 마술에 가깝다. 서버단 프레임워크가 자신만의 렌더링 엔진이 있는 것에 반해, 앵귤러는 이 작업을 브라우저에서 처리한다. 당신이 앵귤러를 사용한다면 서버의 도움 없이도 뷰를 통제할 수 있다.</p>
+
+<h2 id="section-4">레벨 1 - 호스트 애플리케이션과 통합</h2>
+
+<p>이 레벨은 호스트 애플리케이션과 앵귤러 애플리케이션이 상호 제공하는 기능의 조합이다. 서버가 앵귤러 애플리케이션에 대해 잘 알지 못하더라도 서버와 클라이언트가 상호 존중하는 방식으로 구성해야 하고 이 둘은 상대방의 행동 방식을 염두에 두어야 한다.</p>
+
+<h4 id="section-5">라우팅</h4>
+
+<p>앞서 살펴본 해시 방식 URL과는 반대로, 조금더 일반적인 HTML 5 pushState 방식(*) URL은 서버의 지원여부에 달려 있다. 이런 URL은 example.com/about 또는 example.com/products/1 처럼 해시를 갖지 않는다. 여기서 문제는 사용자가 URL을 사용하여 당신의 애플리케이션에 최초로 접속할 때, 앵귤러 애플리케이션 입장에서는 라우트를 처리해볼 기회가 없다는 것이다. 대신, 서버가 요청을 먼저 받고 클라이언트로 앵귤러 애플리케이션을 돌려 준 다음, 라우팅 처리를 마치게 한다. <a href="http://angularfirst.com/your-first-angular-2-asp-net-core-project-in-visual-studio-code-part-6/">여기</a>에서 관련한 예제를 살펴볼 수 있다.</p>
+
+<p>(*) HTML 5에서는 브라우저의 히스토리에 접근할 수 있는 API를 정의하고 있다. pushState()는 히스토리에 새 엔트리를 작성할 수 있게 도와준다.</p>
+
+<h4 id="section-6">인증</h4>
+
+<p>때로는, 인증된 사용자만 앵귤러 애플리케이션에 접근하도록 제한해야할 때가 있다. 앵귤러 애플리케이션이 Web API 를 통해 사용자를 인증할 수 있지만 호스트 애플리케이션에서 인증하도록 하는 옵션도 가능하다. 예를 들면, 사용자가 당신의 웹 애플리케이션에 최초로 접근을 시도할 때, 서버가 Unauthorized 메시지를 반환할 수 있다. 이 과정에서 어떤 앵귤러 코드도 브라우저로 반환되지 않는다.</p>
+
+<h4 id="section-7">뷰 렌더링</h4>
+
+<p>앞서 말했듯이 앵귤러 렌더링은 애플리케이션의 UI를 만들어내는 것, 그 이상의 능력을 갖고 있다. 일반적으로, 렌더링은 브라우저에서 발생한다. 그러나, 로딩 시간과 SEO 에 최적화된 애플리케이션은 서버단 렌더링의 도움을 받는다.</p>
+
+<p>이 부분이 바로 Augular Universal(https://universal.angular.io/)이 딱 들어맞는 곳이다. 서버 프레임워크의 뷰 엔진을 사용하는 대신, 앵귤러 유니버셜은 앵귤러 템플릿을 서버단에서 렌더한다. 브라우저는 클라이언트단 렌더링이 필요없이 즉각적으로 HTML과 CSS를 받아 화면에 출력한다.</p>
+
+<p>앵귤러 유니버셜을 사용하는 것은 앵귤러 애플리케이션을 작성하는데 있어 복잡도를 높이고 어떤 제약을 강제화한다. 따라서, 이렇게 추가적인 성능  향상을 위해서는 그에 따른 비용을 감수해야 한다는 것을 이해해야 한다. 더 자세한 내용은 <a href="https://github.com/angular/universal">GitHub</a>에서 확인할 수 있다.</p>
+
+<h4 id="section-8">국제화; 다국어 지원</h4>
+
+<p>다국어 지원은 호스트 애플리케이션이 직접적인 역할을 하는 부분이 아닐수도 있지만, 어쩌면 통합된 라우팅, 인증 또는 원하는 사용자 경험을 제공하기 위해 역할을 해야할 수도 있다.</p>
+
+<h4 id="section-9">로깅</h4>
+
+<p>로깅은 호스트 애플리케이션과 앵귤러 애플리케이션사이에 긴밀하게 통합되어 있을 필요는 없다. 그러나, 라우팅, 인증, 렌더링 등에서 서버의 역할이 많아졌다는 것을 고려할 때, 이렇게 추가된 역할에서 발생하는 에러를 로깅해야 할 것을 고려해야 한다.</p>
+
+<h2 id="web-apis">레벨 2 - Web APIs</h2>
+
+<p>Web API 는 서버단 종속성이다. 그렇다고, 꼭 호스팅 애플리케이션에 위치해야 할 필요는 없다. 이 종속성(Web API)을 자체 코드베이스에 유지하는 것만으로도 많은 잇점이 있다. 빌드와 배포는 변경사항이 있는 애플리케이션에서만 수행하면 된다. API 작성은 그것이 (HTTPS 처럼 일반적인 프로토콜위에서) 동작하기만 한다면 어떤 기술로 작성되었는지 상관없다. 회사 또는 팀에서 익숙한 기술을 사용할 수 있다. 만약, <a href="https://en.wikipedia.org/wiki/Web_API">Web APIs</a> 와 <a href="https://en.wikipedia.org/wiki/Microservices">Microservices</a> 개념에 익숙하다면 레벨 2 그룹이 이 개념들을 포함한다.</p>
+
+<h4 id="web-apis-1">Web APIs</h4>
+
+<p>애플리케이션이 필요로 하는 Web API의 역할은 데이터 액세스, 로깅, 사용 분석등을 포함한다. 흥미 있는 점은, 이런 역할 중 어떤 것도 앵귤러 애플리케이션에 대한 지식을 필요로 하지 않는다는 것이다. 사실, API는 여러 다른 종류의 프론트엔드 애플리케이션에 서비스를 제공한다.</p>
+
+<h4 id="section-10">인증</h4>
+
+<p>이 레벨에서의 인증은 전형적으로 앵귤러 애플리케이션과 Web API 서버에서 직접 처리한다. 여러 가지 다양한 방법이 있지만 <a href="https://jwt.io/">JSON web tokens</a> 으로 사용자 신원을 관리하는 방식이 현재의 솔루션이라고 할 수 있다.</p>
+
+<h4 id="section-11">국제화; 다국어 지원</h4>
+
+<p>이 레벨에서의 다국어 지원은 web API를 통해 서버단 기술을 사용하여 처리될 것이다. 다시 한번 강조하지만, API라는 계약을 넘어서는 추가적인 어떤 결합도 없다.</p>
+
+<h4 id="section-12">번들링이 필요한 경우</h4>
+
+<p>어떤 경우에는 애플리케이션도 작고 애플리케이션이 의존하는 API 역시 작은 경우가 있다. 이런 경우에는, 같은 애플리케이션에 모든 기능을 모아 두자고 결정할 수도 있을 것이다. 그렇게 되면, 빌드와 배포를 공유하는 셈이 되어 한결 간편해진다. 종종, 기능을 쪼개어 서버와 클라이언트로 나누는 것은 들이는 노력만큼의 충분한 보상이 없을 때도 있다.</p>
+
+<h4 id="section-13">결론</h4>
+
+<p>모든 애플리케이션은 각기 다르다. 이글을 통해 애플리케이션의 관심사가 어떻게 서버와 앵귤러 애플리케이션 사이에서 종속성을 만들어 내는지 이해하고, 이런 고려사항을 여러분의 설계에 반영할 수 있기를 바란다.</p>
+
+<p>독자 중에서는 서버와 통합하는 개발 툴에 대해서는 전혀 다루지 않았음을 눈치챈 독자도 있을 것이다. 이 것은 향후 포스팅의 주제가 될테니 이 블로그를 계속 주시해주기 바란다.</p>
+
+<p>결국, 애플리케이션을 디자인하는 오직 한가지 방법이란 없다. 다양한 옵션을 아는 것만으로도 여러분은 롱런하는 애플리케이션을 디자인할 채비를 갖춘것이다.</p>
+
+<p>여러분 생각은 어떤가? 서버에서 운영하는 것이 낫다고 판단되는 특별한 기능이 있는가? 아니면 클라이언트에서? 의견을 함께 나누면 좋겠다.</p>
+
+        
+          <div id="disqus_thread"></div><!-- /#disqus_thread -->
+          
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'jakeymvcblog'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://blog.jakeymvc.com/revolutionary-aspnetcore-angualr2/" class="btn" title="Revolutionary ASP.NET Core & Angular 2">Previous</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2017 Jake Ryu. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	
+	<a href="https://facebook.com/ryu.jihyung" title="Jake Ryu on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	<a href="https://github.com/jakeymvc" title="Jake Ryu on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="http://blog.jakeymvc.com/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://blog.jakeymvc.com';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://blog.jakeymvc.com/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://blog.jakeymvc.com/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet 
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+ 'https://www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-54850641-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+-->
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54850641-2', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+
+
+
+
+
+</body>
+</html>
