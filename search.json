@@ -2,6 +2,14 @@
 
   
     {
+      "title"			: "VS Code로 풀스택 개발이 가능할까?",
+      "link"			: "http://blog.jakeymvc.com/vscode/",
+      "excerpt"		: "이제 마이크로소프트의 데모에서 맥북을 사용하는 것은 별로 신기한 일도 아니고, 유명한 개발자들도 맥북을 상당히 사용하고 있다는 사실에 고무되어 맥북을 구입했다. MS DOS 부터 시작한 뼈속 깊이 MS맨이 Mac OS를 시작한 것이다."
+    }
+  
+
+  
+    ,{
       "title"			: "앵귤러와 서버",
       "link"			: "http://blog.jakeymvc.com/angular-and-server/",
       "excerpt"		: "앵귤러 애플리케이션을 만들 때, 서버단 애플리케이션과 어떻게 통합해야 할까? 선택 가능한 어떤 옵션이 있고 또, 그 선택이 맞는지 어떻게 알 수 있을까? 이런 주제는 앵귤러 위주의 자료들에서 종종 쉽게 지나치는 문제이다. 한편으로, 서버단을 다루는 글에서는 독자가 이미 강력한 프론트엔드 프레임워크를 사용하고 있다는 가능성을 배제하고 서버단 기능만을 강조한다."
@@ -241,14 +249,6 @@
   
 
   
-    ,{
-      "title"			: "제이키의 MVC 이야기",
-      "link"			: "http://blog.jakeymvc.com/about/",
-      "excerpt"		: ""
-    }
-  
-
-  
 
   
 
@@ -257,6 +257,14 @@
       "title"			: "Theme Setup",
       "link"			: "http://blog.jakeymvc.com/theme-setup/",
       "excerpt"		: "Instructions on how to install and customize the Jekyll theme So Simple."
+    }
+  
+
+  
+    ,{
+      "title"			: "제이키의 MVC 이야기",
+      "link"			: "http://blog.jakeymvc.com/about/",
+      "excerpt"		: ""
     }
   
 

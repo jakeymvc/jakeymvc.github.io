@@ -1,4 +1,171 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://blog.jakeymvc.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://blog.jakeymvc.com/" rel="alternate" type="text/html" /><updated>2017-03-14T21:06:42+00:00</updated><id>http://blog.jakeymvc.com/</id><title type="html">제이키의 MVC 이야기</title><subtitle>ASP.NET Core MVC + Angular 2</subtitle><entry><title type="html">앵귤러와 서버</title><link href="http://blog.jakeymvc.com/angular-and-server/" rel="alternate" type="text/html" title="앵귤러와 서버" /><published>2017-03-14T00:00:00+00:00</published><updated>2017-03-14T00:00:00+00:00</updated><id>http://blog.jakeymvc.com/angular-server</id><content type="html" xml:base="http://blog.jakeymvc.com/angular-and-server/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://blog.jakeymvc.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://blog.jakeymvc.com/" rel="alternate" type="text/html" /><updated>2017-05-18T00:32:01+01:00</updated><id>http://blog.jakeymvc.com/</id><title type="html">제이키의 MVC 이야기</title><subtitle>ASP.NET Core MVC + Angular 2</subtitle><entry><title type="html">VS Code로 풀스택 개발이 가능할까?</title><link href="http://blog.jakeymvc.com/vscode/" rel="alternate" type="text/html" title="VS Code로 풀스택 개발이 가능할까?" /><published>2017-05-17T00:00:00+01:00</published><updated>2017-05-17T00:00:00+01:00</updated><id>http://blog.jakeymvc.com/vscode</id><content type="html" xml:base="http://blog.jakeymvc.com/vscode/">&lt;p&gt;나는 Classic ASP 부터 시작해서 마이크로소프트의 기술을 주로 사용해서 웹 개발을 해왔다. 최근 마이크로소프트의 크로스 플랫폼 정책과 프론트엔드 중심의 웹 개발 트렌드를 보면서 나도 변화가 필요하다는 생각을 줄곧 해왔다.&lt;/p&gt;
+
+&lt;p&gt;이제 마이크로소프트의 데모에서 맥북을 사용하는 것은 별로 신기한 일도 아니고, 유명한 개발자들도 맥북을 상당히 사용하고 있다는 사실에 고무되어 맥북을 구입했다. MS DOS 부터 시작한 뼈속 깊이 MS맨이 Mac OS를 시작한 것이다.&lt;/p&gt;
+
+&lt;p&gt;맥 운영체제에서 마이크로소프트의 ASP.NET 솔루션을 개발하려면 어떤 도구를 사용할 수 있을까. 다행이도 Visual Studio 2017 for Mac (이하, VS 2017)이라는 든든한 도구가 최근에 발표되었고 Visual Studio Code(이하, VS Code)는 계속 주가를 올리고 있는 중이다. 이 외에도, 여러 텍스트 에디터에서 닷넷 개발을 지원하는 OmniSharp 와 ReSharper로 유명한 JetBrains라는 회사의 Rider 도 있지만 VS Code에 유독 관심이 간다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/dev-tools.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/dev-tools.png&quot; alt=&quot;ASP.NET Core 개발도구&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;VS 2017은 IDE로써 사용자의 선택을 쉽게 해주지만 그 이전 버전의 경험이 썩 좋지 않은 터라 VS Code 를 사용해 Angular + ASP.NET Core 솔루션을 작성하려고 한다. 이 글에서는 가볍고 응답이 빠른 VS Code와 CLI (Command Line Interface) 도구로 개발환경을 구성하는 방법을 알아 볼 것이다. 내용이 맥 환경에 맞추어져 있으나 리눅스에서도 유사한 방법으로 설정이 가능하다.&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;개발 환경 구성하기&lt;/h2&gt;
+
+&lt;h3 id=&quot;sdk&quot;&gt;1. 닷넷 코어 SDK&lt;/h3&gt;
+&lt;p&gt;ASP.NET Core 개발을 위해 맥에서 수행해야 할 작업이 &lt;a href=&quot;https://www.microsoft.com/net/core#macos&quot;&gt;공식문서&lt;/a&gt;에 잘 정리되어 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/openssl.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/openssl.png&quot; alt=&quot;Install OpenSSL&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;SDK를 설치하기 전에 openssl을 먼저 설치하는 것이 눈에 띈다. brew라는 명령어를 사용하려면 &lt;a href=&quot;https://brew.sh/&quot;&gt;Homebrew&lt;/a&gt; 라는 맥의 패키지 관리자를 먼저 설치하고 최신으로 업데이트한다. 그리고, openssl 패키지를 설치하는데 이 과정을 제대로 거치지 않으면 NuGet 패키지를 다운로드할 때 문제가 된다.&lt;/p&gt;
+
+&lt;p&gt;이후, &lt;a href=&quot;https://www.microsoft.com/net/core#macos&quot;&gt;공식문서&lt;/a&gt;에 따라 닷넷 코어 SDK를 설치하고 닷넷 CLI(Command Line Interface)를 사용해 Hello World 앱을 만들고 실행해서 제대로 동작하는지 확인한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;vs-code--extensions&quot;&gt;2. VS Code + Extensions&lt;/h3&gt;
+&lt;p&gt;VS Code를 &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;공식 사이트&lt;/a&gt;에서 다운로드해 설치하고, Angular와 C# 개발에 유용한 확장툴을 아래와 같이 설치한다. 각각의 익스텐션을 선택하여 그 설명을 읽어보면 그 용도를 쉽게 알 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/vscode-extensions.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/vscode-extensions.png&quot; alt=&quot;VS Code Extensions&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;yeoman-&quot;&gt;3. Yeoman 스캐폴딩&lt;/h3&gt;
+&lt;p&gt;좋은 스캐폴딩 도구는 생산성에 큰 도움이 된다. &lt;a href=&quot;http://yeoman.io/&quot;&gt;Yeoman&lt;/a&gt;은 현대적인 웹 개발에 사용되는 다양한 종류의 템플릿을 제공한다. VS Code는 스캐폴딩 도구가 없기 때문에 터미널에서 아래 명령문을 통해 Yeoman의 SPA용 닷넷 코어 템플릿을 설치한다. npm은 Node 패키지 관리자이므로 &lt;a href=&quot;https://nodejs.org/en/download/&quot;&gt;Node&lt;/a&gt;가 먼저 설치되어 있어야 한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo npm install -g yo generator-aspnetcore-spa
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;sql-&quot;&gt;4. SQL 서버&lt;/h3&gt;
+&lt;p&gt;Windows에서는 SQL Experss를 사용할 수 있지만 맥과 리눅스에서는 Docker 이미지를 사용해야 한다. 먼저, &lt;a href=&quot;https://www.docker.com/&quot;&gt;docker.com&lt;/a&gt;에서 설치파일을 받아 Docker를 설치한다. Docker는 애플리케이션을 배포하는 컨테이너로써 그 안에 모든 종속성과 구성내용을 포함하기 때문에 배포되는 서버에 영향을 받지않고 애플리케이션을 일관되게 동작시킬 수 있다.&lt;/p&gt;
+
+&lt;p&gt;리눅스용 SQL 서버 이미지를 사용할텐데, SQL 서버의 운영환경이 최소 4GB 메모리를 필요로 하기 때문에 아래와 같이 Docker의  설정을 바꿔준다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/docker-memory.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/docker-memory.png&quot; alt=&quot;Docker memory configuration&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;이제, 터미널에서 다음의 명령문을 통해 리눅스용 SQL 서버 이미지를 다운로드한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo docker pull microsoft/mssql-server-linux
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;이미지를 실행하기 위해 다음 명령문을 실행한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo docker run -e ‘ACCEPT_EULA=Y’ -e ‘SA_PASSWORD=SuperSecretPassword!234’ -p 1433:1433 -d microsoft/mssql-server-linux
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;-e 옵션으로 제공하는 두 개의 환경변수가 있다. EULA(End User License Agreement)에 동의하고 sa 계정의 비밀번호를 설정해야 한다. Docker 컨테이너와 호스팅 머신의 포트를 1433으로 동일하게 매핑해 주고 -d 옵션으로 백그라운드에서 동작하게 한다.&lt;/p&gt;
+
+&lt;p&gt;만약에 리눅스에서 작업한다면 -v 옵션을 사용할 수 있는데 컨테이너와 호스팅 머신의 볼륨(저장 장소)을 매핑해 주어 데이터베이스에 저장하는 내용을 컨테이너 재시작후에도 유지할 수 있다. 아쉽게도 맥에서는 지원되지 않아서 컨테이너를 재시작하면 데이터베이스가 사라진다(시스템을 재시작하면 Docker 역시 초기화된다). 따라서, 데이터베이스를 매번 생성하고, 개발 테스트를 위해 초기 데이터를 입력하도록  Entity Framework의 마이그레이션 기능을 활용하는 것을 추천한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;sql--&quot;&gt;5. SQL 서버 클라이언트&lt;/h3&gt;
+&lt;p&gt;Windows 라면 데이터베이스의 내용을 확인하기 위해 SQL Server Management Studio를 사용할테지만 맥과 리눅스에서는 아쉽게도 사용할 수 없다. 그 대안으로 리눅스에서는 &lt;a href=&quot;https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-connect-and-query-sqlcmd&quot;&gt;Connect to SQL Server on Linux and run Transact-SQL queries&lt;/a&gt; 문서의 내용대로 커맨드 라인 도구를 사용할 수 있지만 맥 환경에는 마땅한 무료 도구가 없는 것 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.macsqlclient.com/&quot;&gt;macsqlclient.com&lt;/a&gt;에서 SSMS와 유사한 도구를 구입할 수 있다. 일주일간 무료체험할 수 있으니 사용 후 구입을 결정해도 된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;새 프로젝트 생성과 실행&lt;/h2&gt;
+
+&lt;p&gt;터미널에서 프로젝트를 생성할 디렉토리로 이동해서 &lt;code class=&quot;highlighter-rouge&quot;&gt;yo aspnetcore-spa&lt;/code&gt; 명령문을 사용하면 새로운 프로젝트를 만들 수 있다. 아래 스냅샷처럼 tomato 라는 폴더를 생성하고 aspnetcore-spa 템플릿(boilerplate)을 사용하여 새로운 프로젝트를 만든다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/new-project.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/new-project.png&quot; alt=&quot;new project&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;간단히 &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet run&lt;/code&gt; 명령어로 터미널에서 애플리케이션을 실행한 후, &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:5000&lt;/code&gt;으로 접속해 보면 다음 그림과 같은  Single Page Application을 만날 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/hello-world.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/hello-world.png&quot; alt=&quot;hello world&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;터미널에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;^ C&lt;/code&gt; 키로 웹 서비스를 종료하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;code .&lt;/code&gt; 명령어로 프로젝트 코드를 VS Code 에서 열어보자. 만약 &lt;code class=&quot;highlighter-rouge&quot;&gt;code&lt;/code&gt; 라는 명령어가 먹히지 않는다면 다음과 같이 문제를 해결한다.&lt;/p&gt;
+
+&lt;p&gt;VS Code 에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;shift + cmd + P&lt;/code&gt; 키로 VS Code 의 전체 명령어를 띄우고 “command”로 검색하여 첫번째 결과를 선택함으로써 &lt;code class=&quot;highlighter-rouge&quot;&gt;code&lt;/code&gt; 명령어를 시스템 path에 추가한다. 새 터미널 창에서 프로젝트 폴더로 이동한 뒤 &lt;code class=&quot;highlighter-rouge&quot;&gt;code .&lt;/code&gt; 명령어를 다시 실행하면 의도한 대로 프로젝트 코드가 VS Code에 로딩될 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/install-code-command.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/install-code-command.png&quot; alt=&quot;install code command&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;VS Code는 자체 터미널을 내장하고 있다. “^ ` (back tick)” 단축키로 내장 터미널을 토글할 수 있는데 여기서 &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet run&lt;/code&gt; 명령으로 애플리케이션을 실행시킬 수도 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;hmr-hot-module-replacement&quot;&gt;HMR (Hot Module Replacement)&lt;/h2&gt;
+
+&lt;p&gt;아래 그림은 VS Code의 내장 터미널에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet run&lt;/code&gt;을 실행한 후 터미널에서 출력하고 있는 내용을 보여주고 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/vscode-terminal.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/vscode-terminal.png&quot; alt=&quot;vscode terminal&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;localhost 의 5000번 포트를 통해 접속해야 한다는 정보와 함께 주목할 정보는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Hosting environment&lt;/code&gt;이다. 이 환경변수에 따라 개발자에게 유용한 기능이 활성화/비활성화될 수 있기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;다음의 코드는 애플리케이션 시작시 수행되는 Startup 클래스의 Configure 메서드에 있는 코드의 일부다. 개발 환경일 경우에만 WebPack 미들웨어를 통해 HMR 기능이 동작한다는 것을 알 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;IsDevelopment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseDeveloperExceptionPage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseWebpackDevMiddleware&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WebpackDevMiddlewareOptions&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;HotModuleReplacement&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseExceptionHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/Home/Error&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;별도 설정이 없으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;Production&lt;/code&gt; 모드로 동작하기 때문에 애플리케이션 시작전에 환경변수를 반드시 설정해야 한다. 맥에서 환경변수를 설정하기 위해서는 터미널에서 다음 명령을 실행한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;export ASPNETCORE_ENVIRONMENT=Development
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;여기서 문제는 현재 터미널의 세션에서만 설정이 적용된다는 것이다. 차후에도 이 설정을 계속 유지하고자 한다면 사용자 홈 디렉토리(/Users/jake)에 &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; 이라는 파일을 만들고 위 문장을 추가한다. Windows라면 시스템 고급 설정에서 환경 변수를 추가할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;HMR은 프론트엔드의 코드가 변경되면 이를 탐지하여 자동으로 번들링하고 실시간으로 적용하는 기술이다. 소스 변경과 동시에 브라우저를 새로고침하지 않아도 수정 내용이 자동으로 반영되므로 개발 단계에 꼭 필요한 기능이다. 아래 그림은 크롬의 개발자 도구 화면이다. 첫 줄에서 HMR 이 준비되어 있는 것을 확인할 수 있고, 중간쯤에는 Updated modules: 이하의 로그에서 보는 것처럼  변경된 화면과 그 이후 일어나는 과정까지 확인이 가능하다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/hmr.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/hmr.png&quot; alt=&quot;HMR&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;그러나, 아쉽게도 서버단의 변경은 WebPack이 탐지할 수 있는 영역이 아니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;^ C&lt;/code&gt;로 서비스를 종료하고 다시 &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet run&lt;/code&gt; 명령을 실행해야만 서버 코드의 변경을 확인할 수 있다. 서버단의 C# 코드를 변경했을 때도 브라우저가 자동으로 갱신되면 얼마나 좋을까?&lt;/p&gt;
+
+&lt;p&gt;구글에서 dotnet watch를 검색해 보자. dotnet watch 는 파일 감시자로써 소스 코드의 변화를 주시하고 있다가 변경사항이 발견되면 애플리케이션을 재시작하는 개잘자 도구이다. &lt;a href=&quot;https://github.com/aspnet/DotNetTools/tree/dev/src/Microsoft.DotNet.Watcher.Tools&quot;&gt;여기&lt;/a&gt;에 사용방법이 자세히 설명되어 있다.&lt;/p&gt;
+
+&lt;p&gt;문서에 설명된 대로 &lt;code class=&quot;highlighter-rouge&quot;&gt;.csproj&lt;/code&gt; 파일에 다음의 문장을 추가한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;ItemGroup&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;DotNetCliToolReference&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Include=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Microsoft.DotNet.Watcher.Tools&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.0.0&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ItemGroup&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;그리고, 터미널에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet restore&lt;/code&gt; 명령문을 실행하면 설치된다. &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet restore&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt; 처럼 패키지를 다운로드하여 설치하는데 서버단 패키지를 설치할 때 사용한다.&lt;/p&gt;
+
+&lt;p&gt;이제 애플리케이션을 다음과 같이 watch 모드로 실행하면 서버 코드 변경시 재빌드하고 애플리케이션을 다시 시작한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dotnet watch run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;코드 변경이 탐지되는지 테스트하기 위해 HomeController 의 index 액션에서 throw new Exception() 문장으로 에러를 만들었다. 그 결과, 애플리케이션이 다시 시작되는 모습을 아래 그림에서 확인할 수 있다. 애플리케이션은 재시작되었지만 브라우저는 자동으로 새로고침되지 않는것이 한가지 아쉬운 점이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/dotnet-watch-run.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/dotnet-watch-run.png&quot; alt=&quot;dotnet watch run&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;디버깅&lt;/h2&gt;
+
+&lt;p&gt;VS Code 에서 디버깅은 디버그 탭을 사용한다. 브레이크 포인트는 VS와 마찬가지로 F9 또는 마우스를 사용하여 지정할 수 있다. Step into, step over 등 동일한 디버깅 기능을 툴바에서 제공하고, 디버그 탭은 Watch, Call Stack 등 필요한 패널을 갖추고 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/debug.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/debug.png&quot; alt=&quot;debug&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;git&quot;&gt;Git&lt;/h2&gt;
+
+&lt;p&gt;VS Code는 Git과 잘 통합되어 있다. 다음과 같이 Initialize Repository 버튼으로 저장소를 초기화 하고 메시지와 함께 쉽게 커밋을 만들수 있다. 또한, 내장 터미널에서 Git의 모든 명령문을 사용할 수 있어 Git 사용자에게는 화면 전환없이 편하게 소스를 관리할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/git-init.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/git-init.png&quot; alt=&quot;git init&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/images/post/vscode/git-commit.png&quot;&gt;&lt;img src=&quot;/images/post/vscode/git-commit.png&quot; alt=&quot;git commit&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Git 탭에서는 변경되거나 새로 추가된 파일을 볼 수 있는데 변경된 파일을 선택하면 어떤 부분이 변경되었는지 두 개의 창에서 비교해 보여주기 때문에 어떤 작업중이었는지 쉽게 확인할 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;마치며&lt;/h2&gt;
+
+&lt;p&gt;개발 환경을 구성하기 위해 많은 작업을 거쳤지만 대부분의 과정은 한번만 필요한 작업이다. 이후 프로젝트에서는 환경이 이미 준비되어 있기 때문에 이와 같이 복잡한 과정을 거치지 않을 것이다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“VS Code로 풀스택 개발이 가능할까?”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;가능할 뿐만 아니라 추천하고 싶다. 프론트엔드와 백엔드에서의 코드 변경이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Hot Module Replace&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet watch&lt;/code&gt;를 통해 개발자의 추가 노력없이 애플리케이션에 적용되므로 생산성을 높여준다. 터미널에서의 명령문 실행은 CLI(Command Line Interface) 덕에 가능한데, dotnet cli, angular cli 등에서 보듯이 개발 추세가 CLI 중심으로 가고 있다고 해도 과언이 아니다.&lt;/p&gt;
+
+&lt;p&gt;실제로 많은 시간을 할애하게될 코딩은 VS Code를 사용하면서 직접 경험해 보기를 권한다. VS Code가 자칫 경량화된 IDE라고 보여질 수도 있지만 최적화된 텍스트 에디터라고 보는 것이 맞을 것 같다. 파일간 이동이나, 젠 코딩등 개발 업무를 쉽고 빠르게 해주는 좋은 기능이 많이 있다. 무엇보다도 개발자 커뮤니티가 제공하는 무한대의 익스텐션을 기호에 맞게 사용할 수 있는 것은 큰 장점이다.&lt;/p&gt;
+
+&lt;p&gt;마지막으로 이 글은 VS 2017을 사용해 보지 않은 상태에서 작성한 글임을 참작해주시기 바란다. VS 2017에서는 새롭게 프론트엔드 디버깅을 지원하는등 풀스택 개발에 편리한 기능이 추가되었다고 들었다. 상황에 따른 적절한 개발환경을 구성하는 것이 중요할 것이다.&lt;/p&gt;</content><author><name>Jake Ryu</name><email>jakeymvc@gmail.com</email></author><category term="vscode" /><category term="aspnet-core" /><category term="angualr2" /><summary type="html">이제 마이크로소프트의 데모에서 맥북을 사용하는 것은 별로 신기한 일도 아니고, 유명한 개발자들도 맥북을 상당히 사용하고 있다는 사실에 고무되어 맥북을 구입했다. MS DOS 부터 시작한 뼈속 깊이 MS맨이 Mac OS를 시작한 것이다.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://blog.jakeymvc.com{&quot;feature&quot;=&gt;&quot;so-simple-sample-image-3.jpg&quot;}" /></entry><entry><title type="html">앵귤러와 서버</title><link href="http://blog.jakeymvc.com/angular-and-server/" rel="alternate" type="text/html" title="앵귤러와 서버" /><published>2017-03-14T00:00:00+00:00</published><updated>2017-03-14T00:00:00+00:00</updated><id>http://blog.jakeymvc.com/angular-server</id><content type="html" xml:base="http://blog.jakeymvc.com/angular-and-server/">&lt;blockquote&gt;
   &lt;p&gt;이 글은 저자의 동의를 얻어 번역한 글이다. &lt;a href=&quot;http://angularfirst.com/angular-and-the-server/&quot;&gt;원문&lt;/a&gt;이 있는 블로그에는 마이크로소프트 스택에서 앵귤러를 다루는 좋은 글들이 많이 있다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -1230,123 +1397,4 @@ Angular 2의 RC 2버전과 RC 5버전에서 breaking changes 가 있어 고생�
 &lt;h4 id=&quot;section-4&quot;&gt;참고 자료&lt;/h4&gt;
 &lt;p&gt;&lt;a href=&quot;http://donovanbrown.com/post/2011/09/23/How-to-create-a-custom-Value-Provider-for-MVC&quot;&gt;How to create a custom Value Provider for MVC&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://haacked.com/archive/2011/06/30/whatrsquos-the-difference-between-a-value-provider-and-model-binder.aspx/&quot;&gt;What’s the Difference Between a Value Provider and Model Binder?&lt;/a&gt;&lt;/p&gt;</content><author><name>Jake Ryu</name><email>jakeymvc@gmail.com</email></author><category term="mvc" /><summary type="html">모델 바인더의 목표가 모델을 제공하는데 있지만 모델을 구성하는 값을 어디서 어떻게 가져오는지는 알지 못한다. HTTP 요청에서 값을 추출하는 일은 값 공급자의 몫이다.</summary></entry><entry><title type="html">모델 바인딩 (Custom Model Binding)</title><link href="http://blog.jakeymvc.com/model-binding/" rel="alternate" type="text/html" title="모델 바인딩 (Custom Model Binding)" /><published>2015-09-25T16:15:00+01:00</published><updated>2015-09-25T16:15:00+01:00</updated><id>http://blog.jakeymvc.com/model-binder</id><content type="html" xml:base="http://blog.jakeymvc.com/model-binding/">&lt;p&gt;모델 바인딩이란 브라우저가 HTTP 요청에 담아서 전달한 데이터를 이용해 .NET 객체를 생성하는 과정을 말한다. MVC 프레임워크는 요청 값을 분석하여 액션 메서드에 필요한 매개변수 형식을 생성하고 값을 할당한다. int, string과 같은 기본 형식(primitive type)부터 중첩된 클래스까지 처리할 수 있는데, 이렇게 여러 상황을 처리하기 위해서 때로는 작동원리를 이해하고 있는 사용자의 개입이 필요할 때도 있다. 이번 글에서는 모델 바인딩 과정에 참여해서 사용자가 원하는 작업을 어떻게 처리하는지 알아 보고자 한다.&lt;/p&gt;
-
-&lt;p&gt;프로젝트의 막바지 작업으로 리포트를 만들고 있었다. 거의 모든 리포트에서 공통으로 받는 조건 중 하나가 from-to의 날짜 범위였는데 이 날짜가 데이터베이스에는 datetime으로 정의되어 있어 to 조건에서 문제가 생겼다. 예를 들어, 2015년 9월을 대상으로 데이터를 조회한다고 할 때, EF에 사용한 조회 조건이 다음과 같이 조금 부족한 SQL 쿼리로 변환되는 것이 문제였다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SELECT ...
-FROM ...
-WHERE [ActionDate] &amp;gt;= '2015-09-01 00:00:00:000' 
-    AND [ActionDate] &amp;lt;= '2015-09-30 00:00:00:000'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;위의 쿼리는 의도와는 다르게 9월 30일의 데이터를 조회하지 못한다. 시간 때문이다.&lt;/p&gt;
-
-&lt;p&gt;목록 1은 프로그램에서 사용하고 있는 조회문이다. 애초에 toDate를 처리할 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;2015-09-30 23:59:59:000&lt;/code&gt; 처럼 시간 값을 붙여주면 좋겠다는 생각이 들었다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Edit:  컴퓨팅에서 1초라는 시간은 길다고도 할 수 있다. 처음에는 밀리 세컨드를 염두에 두지 않았는데 독자의 피드백을 반영하기 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;2015-09-30 23:59:59:997&lt;/code&gt; 로 변경했다. 밀리 세컨드를 999로 설정하면 MS SQL 서버는 &lt;code class=&quot;highlighter-rouge&quot;&gt;2015-10-01 00:00:00:000&lt;/code&gt;으로 해석한다. 천분의 일(1/1000)로 처리하지 못하고 삼백분의 일(1/300)로 계산하기 때문에 올림처리가 되는 현상이 있기 때문이다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;물론, 받은 날짜에 하루를 더한 후 less than &lt;code class=&quot;highlighter-rouge&quot;&gt;2015-10-01 00:00:00:000&lt;/code&gt; 처리를 해도 되지만 이 것 때문에 날짜를 더하는 로직과, greater than or equal to &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;=&lt;/code&gt; 와 less than &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;&lt;/code&gt; 을 혼용하는 것을 개인적으로 선호하지 않는다. &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;=&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;=&lt;/code&gt; 를 사용하여 일관되게 &lt;code class=&quot;highlighter-rouge&quot;&gt;=&lt;/code&gt;를 사용함으로써 날짜를 between 이라는 개념에 맞추어 두는 것을 선호한다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&amp;lt;목록 1&amp;gt; Entity Framework 쿼리&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c#&quot; data-lang=&quot;c#&quot;&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IQueryable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BatteryVoltageTransactionReportData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GetBatteryVoltageReading&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fromDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;toDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;query&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BatteryVoltageReadings&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Performance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ResultType&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;S&quot;&lt;/span&gt;
-                    &lt;span class=&quot;p&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Performance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ActionDate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fromDate&lt;/span&gt;
-                    &lt;span class=&quot;p&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Performance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ActionDate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;toDate&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BatteryVoltageTransactionReportData&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;ActionDate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Performance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ActionDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;Username&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Performance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Forename&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Performance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Surname&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;Vin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Performance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Vin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;Voltage&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Voltage&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;다음과 같은 과정으로 문제를 해결해 보자.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;from, to 날짜를 포함하는 DateRange 클래스 정의&lt;/li&gt;
-  &lt;li&gt;DateRange 클래스의 모델 바인딩을 처리할 사용자 모델 바인더 정의&lt;/li&gt;
-  &lt;li&gt;MVC 프레임워크에 DateRange 클래스 전용 모델 바인더를 알림&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;첫 번째로 DateRange 클래스를 목록 2와 같이 정의한다. DateTime과 같은 기본 형식은 MVC 프레임워크가 &lt;code class=&quot;highlighter-rouge&quot;&gt;DefaultModelBinder&lt;/code&gt; 라는 모델 바인더를 사용하여 처리한다. 이 시나리오에서는, FromDate는 원래 값을 유지하면서 ToDate의 시간 값을 조정할 것이므로 DateTime 이라는 primitive type 자체를 대상으로 할 수 없다. 만약, 그렇게 한다면 to 성격의 값을 구별해내야 하는 어려움이 따른다. 속성명을 사용해서 구분해야 하는데 이 방법에 대해서는 다음 포스팅에서 알아보기로 한다.&lt;/p&gt;
-
-&lt;p&gt;&amp;lt;목록 2&amp;gt; DateRange 클래스&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c#&quot; data-lang=&quot;c#&quot;&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DateRange&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FromDate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ToDate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;사용자 클래스를 정의했으니 이를 처리할 모델 바인더를 만들 차례다. 목록 3은 &lt;code class=&quot;highlighter-rouge&quot;&gt;IModelBinder&lt;/code&gt; 인터페이스를 상속하여 사용자 정의 모델 바인더를 구현하고 있다.&lt;/p&gt;
-
-&lt;p&gt;&amp;lt;목록 3&amp;gt; 사용자 정의 모델 바인더&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c#&quot; data-lang=&quot;c#&quot;&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DateRangeBinder&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IModelBinder&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;BindModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ControllerContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;controllerContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ModelBindingContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bindingContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;DateRange&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DateRange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bindingContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;??&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DateRange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FromDate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GetValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bindingContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;FromDate&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;nf&quot;&gt;GetValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bindingContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;ToDate&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ToDate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Year&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Month&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Day&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;23&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;59&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;59&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;997&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GetValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ModelBindingContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ValueProviderResult&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ValueProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AttemptedValue&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Today&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AttemptedValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IModelBinder&lt;/code&gt; 인터페이스는 &lt;code class=&quot;highlighter-rouge&quot;&gt;BindModel&lt;/code&gt;이라는 하나의 메서드를 정의하고 있고, 컨트롤러 컨텍스트와 모델 바인딩 컨텍스트를 받는다. 모델 바인딩 컨텍스트의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Model&lt;/code&gt; 속성에 &lt;code class=&quot;highlighter-rouge&quot;&gt;DateRange&lt;/code&gt; 클래스의 인스턴스가 있으면 사용하고 그렇지 않으면 새 인스턴스를 준비한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;GetValue&lt;/code&gt; 메서드는 MVC 프레임워크의 기본 값 제공자(Value Provider)를 사용해서 입력된 값을 읽는다. 그 결과는 &lt;code class=&quot;highlighter-rouge&quot;&gt;ValueProviderResult&lt;/code&gt; 형식이므로 &lt;code class=&quot;highlighter-rouge&quot;&gt;AttemptedValue&lt;/code&gt; 라는 문자열 속성을 사용하여 날짜 형식으로 변환한다 (RawValue 라는 object 형식의 속성을 사용하여 형 변환해도 된다). 만약, 값이 없다면 기본 값으로 현재 날짜를 돌려주고 있다.&lt;/p&gt;
-
-&lt;p&gt;이제 마지막으로 MVC 프레임워크에 &lt;code class=&quot;highlighter-rouge&quot;&gt;DateRange&lt;/code&gt; 클래스의 모델 바인더가 있다고 알려주는 두 가지 방법을 목록 4와 목록 5에서 보여주고 있다.&lt;/p&gt;
-
-&lt;p&gt;&amp;lt;목록 4&amp;gt; Global.asax 파일 Application_Start() 메서드에 선언&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    ModelBinders.Binders.Add(typeof(DateRange), new DateRangeBinder());
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&amp;lt;목록 5&amp;gt; 사용자 모델 바인더 사용&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c#&quot; data-lang=&quot;c#&quot;&gt;&lt;span class=&quot;na&quot;&gt;[ModelBinder(typeof(DateRangeBinder))]&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DateRange&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;From&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;To&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;목록 4는 Global.asax 파일의 Application_Start() 메서드에 추가하는 내용으로 모델 바인더의 컬렉션에 새로 정의한 모델 바인더를 등록하고 있다.&lt;/p&gt;
-
-&lt;p&gt;목록 5는 모델의 어트리뷰트로서 모델 바인더를 지정하고 있는 모습이다. 개인적으로는 후자의 경우가 가독성이 더 좋은 듯 하다. 모델과 그 바인더를 한 곳에서 보는 것이 모델 바인딩 처리를 별도로 한다는 명시적인 표현이기 때문이다. 참고로, ASP.NET 5에서는 Global.asax 파일이 없어지고 Startup 클래스에서 시작 처리를 해야 한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;정리&lt;/h3&gt;
-
-&lt;p&gt;MVC 프레임워크는 테스트를 염두에 두고 만들어진 프레임워크이기 때문에 기능을 구현함에 있어 인터페이스를 반드시 정의하고 이 인터페이스를 구현하는 기본 클래스를 제공한다. 따라서, 기본 클래스를 상속해서 기능을 확장하는 것이 쉽고, 이번 글의 예제처럼 해당 인터페이스를 구현하는 사용자 클래스를 작성하여 사용자의 상황에 맞는 기능을 주입하는 것이 어렵지 않다.&lt;/p&gt;</content><author><name>Jake Ryu</name><email>jakeymvc@gmail.com</email></author><category term="mvc" /><summary type="html">모델 바인딩이란 브라우저가 HTTP 요청에 담아서 전달한 데이터를 이용해 .NET 객체를 생성하는 과정을 말한다. MVC 프레임워크는 요청 값을 분석하여 액션 메서드에 필요한 매개변수 형식을 생성하고 값을 할당한다.</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;http://haacked.com/archive/2011/06/30/whatrsquos-the-difference-between-a-value-provider-and-model-binder.aspx/&quot;&gt;What’s the Difference Between a Value Provider and Model Binder?&lt;/a&gt;&lt;/p&gt;</content><author><name>Jake Ryu</name><email>jakeymvc@gmail.com</email></author><category term="mvc" /><summary type="html">모델 바인더의 목표가 모델을 제공하는데 있지만 모델을 구성하는 값을 어디서 어떻게 가져오는지는 알지 못한다. HTTP 요청에서 값을 추출하는 일은 값 공급자의 몫이다.</summary></entry></feed>
